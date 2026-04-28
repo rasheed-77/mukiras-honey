@@ -23,6 +23,7 @@ export default function Screenshot({
 }: ScreenshotProps) {
   const { resolvedTheme } = useTheme();
   const src = resolvedTheme === "light" ? srcLight : (srcDark ?? srcLight);
+  const isSvg = src.endsWith(".svg");
 
   return (
     <Image
@@ -31,6 +32,7 @@ export default function Screenshot({
       width={width}
       height={height}
       className={className}
+      unoptimized={isSvg}
     />
   );
 }
