@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-
-import { useTheme } from "@/components/contexts/theme-provider";
+import { useTheme } from "next-themes";
 
 interface ScreenshotProps {
   srcLight: string;

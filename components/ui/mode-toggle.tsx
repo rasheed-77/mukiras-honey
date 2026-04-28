@@ -1,8 +1,7 @@
 "use client";
 
 import { ChevronsUpDownIcon } from "lucide-react";
-
-import { useTheme } from "@/components/contexts/theme-provider";
+import { useTheme } from "next-themes";
 
 import { Button } from "./button";
 import {
