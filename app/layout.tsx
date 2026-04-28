@@ -71,7 +71,7 @@ export default function RootLayout({
       style={{ colorScheme: "dark" }}
       suppressHydrationWarning
     >
-      <body className={`${inter.className} bg-background antialiased`}>
+      <body className={`${inter.variable} bg-background font-sans antialiased`}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
