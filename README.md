@@ -2,8 +2,8 @@
 
 A comprehensive collection of production-ready website components built with Next.js, Shadcn/ui, and Tailwind CSS. Perfect for developers looking to quickly build modern, responsive websites with the power of shadcn/ui components.
 
-[![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1-blue)](https://tailwindcss.com/)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.2-blue)](https://tailwindcss.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue)](https://www.typescriptlang.org/)
 [![shadcn/ui](https://img.shields.io/badge/shadcn/ui-latest-black)](https://ui.shadcn.com/)
 
@@ -11,17 +11,19 @@ A comprehensive collection of production-ready website components built with Nex
 
 > [!TIP]
 > **Tailwind v4 + React 19:**
-> Launch UI v2.0 adds full support for Tailwind v4, React 19 and Next.js 15.
+> Launch UI v2.0 adds full support for Tailwind v4, React 19 and Next.js 16.
 > If you're using Tailwind 3, a version that supports it is still maintained on a [separate branch](https://github.com/launch-ui/launch-ui/tree/tailwind-3).
 
 ## 🚀 Quick Start
 
 1. Install dependencies:
+
 ```bash
 npm install
 ```
 
 2. Start the development server:
+
 ```bash
 npm run dev
 ```
@@ -37,7 +39,7 @@ npm run dev
 
 - 🎨 **Modern Design System**: Built on top of shadcn/ui, offering a clean and professional look
 - 📱 **Fully Responsive**: All components work perfectly across desktop, tablet, and mobile devices
-- ⚡ **Performance Optimized**: Leverages Next.js 14 features for optimal loading speed
+- ⚡ **Performance Optimized**: Leverages modern Next.js features for optimal loading speed
 - 🌗 **Dark Mode Support**: Seamless light/dark mode switching with system preference detection
 - ♿ **Accessibility First**: WCAG compliant components for inclusive web experiences
 - 🎯 **SEO Optimized**: Built with best practices for search engine visibility
@@ -66,7 +68,7 @@ npm run dev
 
 ## 🛠️ Tech Stack
 
-- **Framework**: [Next.js 15](https://nextjs.org/)
+- **Framework**: [Next.js 16](https://nextjs.org/)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **UI Components**: [shadcn/ui](https://ui.shadcn.com/)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
@@ -75,7 +77,7 @@ npm run dev
 
 ## 💡 Use Cases
 
-Launch UI was made for products that need a great-looking, conversion-optimized landing page that speaks to proffessional quality-oriented audiences.
+Launch UI was made for products that need a great-looking, conversion-optimized landing page that speaks to professional quality-oriented audiences.
 
 Perfect for building landing pages for:
 
