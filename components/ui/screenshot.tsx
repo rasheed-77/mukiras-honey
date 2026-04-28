@@ -1,7 +1,6 @@
-"use client";
-
 import Image from "next/image";
-import { useTheme } from "next-themes";
+
+import { cn } from "@/lib/utils";
 
 interface ScreenshotProps {
   srcLight: string;
@@ -20,18 +19,37 @@ export default function Screenshot({
   height,
   className,
 }: ScreenshotProps) {
-  const { resolvedTheme } = useTheme();
-  const src = resolvedTheme === "light" ? srcLight : (srcDark ?? srcLight);
-  const isSvg = src.endsWith(".svg");
+  if (!srcDark) {
+    return (
+      <Image
+        src={srcLight}
+        alt={alt}
+        width={width}
+        height={height}
+        className={className}
+        unoptimized={srcLight.endsWith(".svg")}
+      />
+    );
+  }
 
   return (
-    <Image
-      src={src}
-      alt={alt}
-      width={width}
-      height={height}
-      className={className}
-      unoptimized={isSvg}
-    />
+    <>
+      <Image
+        src={srcLight}
+        alt={alt}
+        width={width}
+        height={height}
+        className={cn(className, "block dark:hidden")}
+        unoptimized={srcLight.endsWith(".svg")}
+      />
+      <Image
+        src={srcDark}
+        alt={alt}
+        width={width}
+        height={height}
+        className={cn(className, "hidden dark:block")}
+        unoptimized={srcDark.endsWith(".svg")}
+      />
+    </>
   );
 }
