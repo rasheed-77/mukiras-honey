@@ -34,12 +34,7 @@ export default function Logos({
       name="TypeScript"
       version="5.9.3"
     />,
-    <Logo
-      key="shadcn"
-      image={ShadcnUi}
-      name="Shadcn/ui"
-      version="4.0.5"
-    />,
+    <Logo key="shadcn" image={ShadcnUi} name="Shadcn/ui" version="4.0.5" />,
     <Logo key="tailwind" image={Tailwind} name="Tailwind" version="4.2.1" />,
   ],
   className,
