@@ -1,8 +1,8 @@
 import "@/app/globals.css";
 
 import type { Metadata } from "next";
+import { ThemeProvider } from "next-themes";
 
-import { ThemeProvider } from "@/components/contexts/theme-provider";
 import { inter } from "@/lib/fonts";
 
 import { siteConfig } from "../config/site";
@@ -72,7 +72,14 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className={`${inter.variable} bg-background font-sans antialiased`}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
