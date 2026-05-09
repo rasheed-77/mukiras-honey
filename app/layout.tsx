@@ -3,7 +3,8 @@ import "@/app/globals.css";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 
-import { inter } from "@/lib/fonts";
+import { RouteTransition } from "@/components/providers/route-transition";
+import { cairo } from "@/lib/fonts";
 
 import { siteConfig } from "../config/site";
 
@@ -15,24 +16,15 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   description: siteConfig.description,
   keywords: [
-    "Landing page template",
-    "Components",
-    "Shadcn",
-    "Next.js",
-    "React",
-    "Tailwind CSS",
-    "Radix UI",
+    "عسل",
+    "عسل فاخر",
+    "عسل سدر",
+    "عسل طلح",
+    "منتجات طبيعية",
   ],
-  authors: [
-    {
-      name: "Mikolaj Dobrucki",
-      url: "https://mikolajdobrucki.com",
-    },
-  ],
-  creator: "mikolajdobrucki",
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "ar_SA",
     url: siteConfig.url,
     title: siteConfig.name,
     description: siteConfig.description,
@@ -51,7 +43,6 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
-    creator: "@mikolajdobrucki",
   },
   icons: {
     icon: "/favicon.svg",
@@ -66,19 +57,21 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="ar"
+      dir="rtl"
       className="dark"
       style={{ colorScheme: "dark" }}
       suppressHydrationWarning
     >
-      <body className={`${inter.variable} bg-background font-sans antialiased`}>
+      <body className={`${cairo.variable} bg-background font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
-          enableSystem
+          enableSystem={false}
+          forcedTheme="dark"
           disableTransitionOnChange
         >
-          {children}
+          <RouteTransition>{children}</RouteTransition>
         </ThemeProvider>
       </body>
     </html>

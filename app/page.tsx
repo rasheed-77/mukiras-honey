@@ -1,27 +1,37 @@
-import CTA from "../components/sections/cta/default";
-import FAQ from "../components/sections/faq/default";
-import Footer from "../components/sections/footer/default";
-import Hero from "../components/sections/hero/default";
-import Items from "../components/sections/items/default";
-import Logos from "../components/sections/logos/default";
-import Navbar from "../components/sections/navbar/default";
-import Pricing from "../components/sections/pricing/default";
-import Stats from "../components/sections/stats/default";
-import { LayoutLines } from "../components/ui/layout-lines";
+import About from "@/components/honey/about";
+import Achievements from "@/components/honey/achievements";
+import BlogPreview from "@/components/honey/blog-preview";
+import Contact from "@/components/honey/contact";
+import Features from "@/components/honey/features";
+import Footer from "@/components/honey/footer";
+import Gallery from "@/components/honey/gallery";
+import Hero from "@/components/honey/hero";
+import Journey from "@/components/honey/journey";
+import Navbar from "@/components/honey/navbar";
+import ProductsSection from "@/components/honey/products-section";
+import TestimonialsSlider from "@/components/honey/testimonials-slider";
+import VisionMission from "@/components/honey/vision-mission";
+import WhyChooseUs from "@/components/honey/why-choose-us";
 
 export default function Home() {
   return (
-    <main className="bg-background text-foreground min-h-screen w-full">
-      <LayoutLines />
+    <main className="min-h-screen w-full bg-[#F6E7C8]">
       <Navbar />
-      <Hero />
-      <Logos />
-      <Items />
-      <Stats />
-      <Pricing />
-      <FAQ />
-      <CTA />
-      <Footer />
+      <div className="home-honey w-full">
+        <Hero />
+        <Features />
+        <About />
+        <ProductsSection />
+        <VisionMission />
+        <Achievements />
+        <Journey />
+        <WhyChooseUs />
+        <Gallery />
+        <TestimonialsSlider />
+        <BlogPreview />
+        <Contact />
+        <Footer />
+      </div>
     </main>
   );
 }

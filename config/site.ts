@@ -1,31 +1,29 @@
 export const siteConfig = {
-  name: "Launch UI",
-  url: "https://launchuicomponents.com",
-  getStartedUrl:
-    "https://launchuicomponents.com/docs/getting-started/introduction",
-  ogImage: "https://launchuicomponents.com/og.jpg",
+  name: "مناحل مكيراس",
+  url: "https://example.com",
+  ogImage: "/og.jpg",
   description:
-    "Landing page components built with React, Shadcn/ui and Tailwind that will make your website feel premium.",
-  version: "v2.9",
-  links: {
-    twitter: "https://twitter.com/mikolajdobrucki",
-    github: "https://github.com/launch-ui/launch-ui",
-    email: "mailto:contact@mikolajdobrucki.com",
-  },
+    "مناحل مكيراس — عسل فاخر مُنتقى بعناية بتجربة عربية راقية.",
+  version: "v1.0",
+  getStartedUrl: "/",
   pricing: {
-    pro: "https://launchui.lemonsqueezy.com/buy/b4798c68-c858-4c34-860b-069b5a0d6c4e",
-    team: "https://launchui.lemonsqueezy.com/buy/130d8cfe-e123-464b-9f67-c74c5fedfb45",
+    pro: "/",
+    team: "/",
+  },
+  links: {
+    email: "mailto:contact@example.com",
+    github: "https://github.com",
   },
   stats: {
-    figma: 9923,
-    github: 2078,
-    cli: 21675,
-    total: "33.7k+",
-    updated: "28 Apr 2026",
-    sections: 74,
-    illustrations: 23,
-    animations: 15,
-    templates: 7,
+    updated: "2026",
+    templates: "1",
+    sections: "9",
+    illustrations: "4",
+    animations: "4",
+    /** Numeric placeholders for legacy section components */
+    figma: 12_000,
+    github: 2_100,
+    cli: 8_500,
   },
 };
 
