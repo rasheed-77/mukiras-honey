@@ -614,7 +614,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen w-full max-w-[100vw] overflow-hidden"
+      className="relative min-h-[100svh] w-full max-w-[100vw] overflow-hidden"
     >
       {/* Background (z-0) */}
       <div className="pointer-events-none absolute inset-0 z-0 hero-cinematic-base" />
@@ -720,6 +720,29 @@ export default function Hero() {
             transition={{ duration: 16 + idx * 1.2, repeat: Infinity, ease: "easeInOut", delay: p.d }}
           />
         ))}
+
+        {/* Mobile-only bokeh (stronger, within requested opacity) */}
+        {[
+          { t: "22%", l: "6%", s: 220, o: 0.44, c: "#fff7d6", d: 0.05 },
+          { t: "24%", l: "70%", s: 260, o: 0.45, c: "#f5c15a", d: 0.12 },
+          { t: "38%", l: "78%", s: 210, o: 0.4, c: "#fff7d6", d: 0.2 },
+        ].map((p, idx) => (
+          <motion.div
+            key={`m-${idx}`}
+            className="absolute rounded-full blur-3xl sm:hidden"
+            style={{
+              top: p.t,
+              left: p.l,
+              width: p.s,
+              height: p.s,
+              opacity: p.o,
+              background: `radial-gradient(circle, ${p.c} 0%, rgba(255,255,255,0) 74%)`,
+              transform: "translateZ(0)",
+            }}
+            animate={{ y: [0, -14, 0], x: [0, idx % 2 === 0 ? 10 : -10, 0] }}
+            transition={{ duration: 14 + idx * 1.2, repeat: Infinity, ease: "easeInOut", delay: p.d }}
+          />
+        ))}
       </div>
 
       {/* Flowers/Waves + Jar Scene (B/D/A) */}
@@ -768,12 +791,43 @@ export default function Hero() {
           <FlowersCornerSVG side="right" />
         </motion.div>
 
+        {/* Mobile flowers (light, visible) — z-9 */}
+        <motion.div
+          className="absolute left-2 top-3 z-[9] w-[140px] opacity-[0.38] sm:hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0.32, 0.42, 0.32], y: [0, -4, 0] }}
+          transition={{ duration: 9.5, repeat: Infinity, ease: "easeInOut" }}
+          aria-hidden
+        >
+          <FlowersCornerSVG side="left" />
+        </motion.div>
+        <motion.div
+          className="absolute right-2 top-3 z-[9] w-[150px] opacity-[0.38] sm:hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0.32, 0.42, 0.32], y: [0, -4, 0] }}
+          transition={{ duration: 10.5, repeat: Infinity, ease: "easeInOut", delay: 0.15 }}
+          aria-hidden
+        >
+          <FlowersCornerSVG side="right" />
+        </motion.div>
+
         {/* Right-side leaves for richer edge (E) — z-9 */}
         <motion.div
           className="pointer-events-none absolute right-0 top-[30%] z-[9] hidden w-[clamp(240px,20vw,360px)] opacity-[0.78] md:block"
           initial={{ opacity: 0 }}
           animate={{ opacity: [0.58, 0.78, 0.58], y: [0, -8, 0] }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 0.35 }}
+          aria-hidden
+        >
+          <SideLeavesSVG />
+        </motion.div>
+
+        {/* Mobile leaves (soft, subtle) — z-9 */}
+        <motion.div
+          className="pointer-events-none absolute right-0 top-[34%] z-[9] w-[160px] opacity-[0.35] sm:hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0.3, 0.4, 0.3], y: [0, -6, 0] }}
+          transition={{ duration: 12.5, repeat: Infinity, ease: "easeInOut", delay: 0.25 }}
           aria-hidden
         >
           <SideLeavesSVG />
@@ -812,20 +866,18 @@ export default function Hero() {
 
         {/* Mobile: simplified but still strong */}
         <motion.div
-          className="absolute bottom-4 left-4 z-[10] w-[min(340px,92vw)] sm:hidden"
-          style={{ opacity: 1 }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1, y: [0, -8, 0] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-4 left-3 z-[10] w-[clamp(120px,38vw,160px)] sm:hidden"
+          style={{ opacity: 1, transform: "translateZ(0)" }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: [0, -6, 0] }}
+          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
         >
-          <div className="rounded-3xl border border-[rgba(217,164,65,0.35)] bg-[rgba(255,243,214,0.35)] p-3 shadow-[0_20px_52px_rgba(26,18,8,0.12)] backdrop-blur-md">
-            <HoneyJarSceneSVG />
-          </div>
+          <HoneyJarSceneSVG />
         </motion.div>
       </div>
 
       {/* Content */}
-      <div className="hero-content mx-auto flex min-h-[calc(100vh-82px)] w-full max-w-[100vw] flex-col items-center justify-center px-4 pb-12 pt-14 sm:px-6 sm:pb-16 sm:pt-16 lg:px-10 lg:pb-20 lg:pt-20">
+      <div className="hero-content mx-auto flex min-h-[calc(100svh-82px)] w-full max-w-[100vw] flex-col items-center justify-center px-4 pb-12 pt-20 sm:px-6 sm:pb-16 sm:pt-16 lg:px-10 lg:pb-20 lg:pt-20">
         <motion.div
           className="w-full max-w-5xl text-center"
           variants={staggerContainer}
