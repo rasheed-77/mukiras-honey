@@ -46,9 +46,10 @@ export default function Gallery() {
               whileHover={{
                 y: -6,
                 scale: 1.01,
+                boxShadow: "0 26px 78px rgba(0,0,0,0.44), 0 0 60px rgba(217,164,65,0.14)",
                 transition: { duration: 0.55, ease: luxuryEase },
               }}
-              className="group relative mb-4 break-inside-avoid overflow-hidden rounded-[1.75rem] border border-border/60 bg-[rgba(255,248,234,0.5)] backdrop-blur-xl transition-[box-shadow] duration-500 hover:border-primary/40 hover:bg-[rgba(255,248,234,0.75)] hover:shadow-[0_28px_70px_rgba(26,18,8,0.12),0_20px_50px_rgba(201,154,46,0.12)]"
+              className="luxury-card group relative mb-4 break-inside-avoid overflow-hidden rounded-[1.75rem]"
             >
               <div className="pointer-events-none absolute -inset-px opacity-40 blur-2xl">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_90%,rgba(217,164,65,0.1),transparent_55%)]" />
@@ -60,11 +61,11 @@ export default function Gallery() {
                 ].join(" ")}
               >
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(245,158,11,0.22),transparent_60%),radial-gradient(circle_at_70%_70%,rgba(217,119,6,0.16),transparent_60%)] transition-transform duration-[850ms] ease-out group-hover:scale-[1.09]" />
-                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(248,243,232,0.35),rgba(201,154,46,0.1),rgba(26,18,8,0.2))]" />
+                <div className="absolute inset-0 lux-media-overlay opacity-[0.65]" />
                 <div className="absolute inset-0 grid place-items-center p-6">
-                  <div className="w-full max-w-xs rounded-[1.5rem] border border-border/60 bg-background/18 p-6 text-center backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,255,255,0.06)_inset]">
+                  <div className="luxury-card w-full max-w-xs rounded-[1.5rem] p-6 text-center">
                     <motion.div
-                      className="mx-auto flex w-fit items-center gap-2 rounded-full border border-border/60 bg-background/15 px-4 py-2"
+                      className="mx-auto flex w-fit items-center gap-2 rounded-full border border-[rgba(217,164,65,0.25)] bg-[rgba(11,9,6,0.55)] px-4 py-2"
                       animate={{ y: [0, -4, 0] }}
                       transition={{
                         duration: 6,
@@ -73,22 +74,22 @@ export default function Gallery() {
                         delay: i * 0.15,
                       }}
                     >
-                      <Sparkles className="size-4 text-primary" />
-                      <span className="text-sm font-medium text-cream">عرض تجريبي</span>
+                      <Sparkles className="size-4 text-[#D9A441]" />
+                      <span className="text-sm font-medium text-[#FFF3D6]">عرض تجريبي</span>
                     </motion.div>
-                    <div className="mt-3 flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                      <ImageOff className="size-4" />
+                    <div className="mt-3 flex items-center justify-center gap-2 text-sm text-[#CBB89A]">
+                      <ImageOff className="size-4 text-[#D9A441]" />
                       <span>الصور النهائية ستُضاف لاحقًا</span>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="absolute bottom-0 right-0 left-0 p-5">
-                <div className="rounded-2xl border border-border/60 bg-background/20 px-4 py-3 backdrop-blur-xl">
-                  <div className="text-sm font-medium text-cream">
+                <div className="luxury-card rounded-2xl px-4 py-3">
+                  <div className="text-sm font-medium text-[#FFF3D6]">
                     لقطة #{i + 1}
                   </div>
-                  <div className="text-muted-foreground mt-1 text-xs">
+                  <div className="mt-1 text-xs text-[#CBB89A]">
                     هذا Placeholder فاخر لعرض الفكرة حتى تتوفر الصور.
                   </div>
                 </div>

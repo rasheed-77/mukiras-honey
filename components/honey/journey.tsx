@@ -65,13 +65,14 @@ export default function Journey() {
                 variants={scaleIn}
                 whileHover={{
                   y: -6,
+                  boxShadow: "0 26px 78px rgba(0,0,0,0.44), 0 0 60px rgba(217,164,65,0.14)",
                   transition: { duration: 0.55, ease: luxuryEase },
                 }}
-                className="glass-premium gold-glow group rounded-[1.75rem] p-6 transition-colors duration-500 hover:border-primary/30"
+                className="luxury-card group relative rounded-[1.75rem] p-6"
               >
                 <div className="flex items-center gap-3">
                   <motion.span
-                    className="grid size-11 place-items-center rounded-2xl border border-border/60 bg-background/15 backdrop-blur"
+                    className="grid size-11 place-items-center rounded-2xl border border-[rgba(217,164,65,0.25)] bg-[rgba(217,164,65,0.12)] backdrop-blur"
                     animate={{ y: [0, -3, 0] }}
                     transition={{
                       duration: 6,
@@ -79,11 +80,11 @@ export default function Journey() {
                       ease: "easeInOut",
                     }}
                   >
-                    <Icon className="size-5 text-primary transition-transform duration-500 group-hover:scale-110" />
+                    <Icon className="size-5 text-[#D9A441] transition-transform duration-500 group-hover:scale-110" />
                   </motion.span>
-                  <div className="font-semibold text-cream">{s.title}</div>
+                  <div className="font-semibold text-[#D9A441]">{s.title}</div>
                 </div>
-                <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
+                <p className="mt-3 text-sm leading-relaxed text-[#CBB89A]">
                   {s.desc}
                 </p>
               </motion.div>

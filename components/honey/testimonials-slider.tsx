@@ -110,7 +110,7 @@ export default function TestimonialsSlider() {
 
         <div className="mt-10 grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
           <motion.div
-            className="glass-premium gold-glow relative overflow-hidden rounded-[2rem] p-7 sm:p-10"
+            className="luxury-card relative overflow-hidden rounded-[2rem] p-7 sm:p-10"
             variants={scaleIn}
             initial="hidden"
             whileInView="visible"
@@ -135,14 +135,14 @@ export default function TestimonialsSlider() {
                 className="relative z-[1]"
               >
                 <div className="flex items-center justify-between gap-4">
-                  <div className="text-primary text-sm font-semibold">{active.name}</div>
-                  <div className="flex items-center gap-1 text-primary/90">
+                  <div className="text-sm font-semibold text-[#D9A441]">{active.name}</div>
+                  <div className="flex items-center gap-1 text-[#D9A441]">
                     {Array.from({ length: active.rating }).map((_, i) => (
                       <Star key={i} className="size-4 fill-current opacity-90" />
                     ))}
                   </div>
                 </div>
-                <p className="text-muted-foreground mt-5 text-lg leading-relaxed">
+                <p className="mt-5 text-lg leading-relaxed text-[#FFF3D6]">
                   {active.text}
                 </p>
               </motion.div>
@@ -165,17 +165,18 @@ export default function TestimonialsSlider() {
                 whileHover={{
                   y: -5,
                   scale: 1.02,
+                  boxShadow: "0 26px 78px rgba(0,0,0,0.44), 0 0 60px rgba(217,164,65,0.14)",
                   transition: { duration: 0.45, ease: luxuryEase },
                 }}
                 className={[
-                  "glass-premium rounded-[1.5rem] p-5 text-right shadow-[0_0_0_1px_rgba(255,255,255,0.04)_inset] transition-shadow duration-300",
+                  "luxury-card relative rounded-[1.5rem] p-5 text-right",
                   i === idx
-                    ? "gold-glow border-primary/35 shadow-[0_22px_56px_rgba(26,18,8,0.1),0_12px_40px_rgba(201,154,46,0.14)]"
-                    : "hover:gold-glow hover:shadow-[0_18px_48px_rgba(26,18,8,0.09)]",
+                    ? "border-[rgba(217,164,65,0.48)]"
+                    : "hover:border-[rgba(217,164,65,0.48)]",
                 ].join(" ")}
               >
-                <div className="text-cream text-sm font-semibold">{r.name}</div>
-                <div className="text-muted-foreground mt-2 line-clamp-3 text-sm leading-relaxed">
+                <div className="text-sm font-semibold text-[#D9A441]">{r.name}</div>
+                <div className="mt-2 line-clamp-3 text-sm leading-relaxed text-[#CBB89A]">
                   {r.text}
                 </div>
               </motion.button>

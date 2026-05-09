@@ -110,7 +110,7 @@ export default function Hero({
               >
                 <Mockup
                   type="responsive"
-                  className="bg-background/90 w-full rounded-xl border-0"
+                  className="luxury-card w-full rounded-xl border-0"
                 >
                   {mockup}
                 </Mockup>

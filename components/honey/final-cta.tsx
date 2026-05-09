@@ -16,7 +16,7 @@ export default function FinalCta() {
   return (
     <Section className="py-14 sm:py-18 md:py-22">
       <div className="mx-auto max-w-[1280px]">
-        <div className="relative overflow-hidden rounded-[2.25rem] border border-border/60 bg-background/10 p-8 backdrop-blur-xl sm:p-12">
+        <div className="luxury-card relative overflow-hidden rounded-[2.25rem] p-8 sm:p-12">
           <div className="pointer-events-none absolute inset-0 opacity-90 [background:radial-gradient(circle_at_25%_20%,rgba(245,158,11,0.26),transparent_50%),radial-gradient(circle_at_80%_70%,rgba(217,119,6,0.18),transparent_55%),linear-gradient(135deg,rgba(255,255,255,0.05),transparent)]" />
           <div className="pointer-events-none absolute -top-32 right-[-6rem] h-80 w-80 rounded-full bg-primary/18 blur-3xl [animation:glow_10s_ease-in-out_infinite]" />
           <div className="pointer-events-none absolute -bottom-40 left-[-7rem] h-96 w-96 rounded-full bg-amber-400/12 blur-3xl [animation:glow_12s_ease-in-out_infinite]" />
@@ -25,7 +25,7 @@ export default function FinalCta() {
               <h2 className="text-3xl font-semibold tracking-tight sm:text-5xl">
                 تواصل واطلب الآن
               </h2>
-              <p className="text-muted-foreground mt-4 max-w-2xl text-lg leading-relaxed">
+              <p className="mt-4 max-w-2xl text-lg leading-relaxed text-[#CBB89A]">
                 تواصل مباشر عبر واتساب—عرض فقط بدون سلة أو دفع—مع تجربة فاخرة
                 تليق بعلامة Premium.
               </p>
@@ -41,7 +41,7 @@ export default function FinalCta() {
               <Button
                 asChild
                 variant="outline"
-                className="rounded-2xl border-border/60 bg-background/10 px-6 py-6 text-base backdrop-blur-xl"
+                className="rounded-2xl border-[rgba(217,164,65,0.28)] bg-[rgba(11,9,6,0.55)] px-6 py-6 text-base text-[#FFF3D6] backdrop-blur-xl hover:border-[rgba(217,164,65,0.48)] hover:bg-[rgba(22,17,11,0.68)]"
               >
                 <a href="/dashboard/products">
                   إدارة المنتجات

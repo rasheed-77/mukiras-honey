@@ -15,6 +15,64 @@ export type HoneyProduct = {
 const STORAGE_KEY = "honey.products.v1";
 const EVENT_NAME = "honey-products-changed";
 
+export const demoProducts: HoneyProduct[] = [
+  {
+    id: "demo-1",
+    name: "عسل سدر فاخر",
+    shortDescription: "قوام غني ونكهة مميزة — نموذج عرض.",
+    type: "سدر",
+    size: "500 جم",
+    price: 0,
+    availability: "available",
+    createdAt: 0,
+  },
+  {
+    id: "demo-2",
+    name: "عسل طلح",
+    shortDescription: "اختيار يمني أصيل بمذاق متوازن — نموذج عرض.",
+    type: "طلح",
+    size: "250 جم",
+    availability: "available",
+    createdAt: 0,
+  },
+  {
+    id: "demo-3",
+    name: "عسل زهور برية",
+    shortDescription: "قوام عميق ورائحة غنية — نموذج عرض.",
+    type: "زهور",
+    size: "1 كجم",
+    availability: "unavailable",
+    createdAt: 0,
+  },
+  {
+    id: "demo-4",
+    name: "عسل جبلي",
+    shortDescription: "نقاء ودفء بنكهة جبلية — نموذج عرض.",
+    type: "جبلي",
+    size: "500 جم",
+    availability: "available",
+    createdAt: 0,
+  },
+  {
+    id: "demo-5",
+    name: "عسل الحمضيات",
+    shortDescription: "عطر لطيف ولمسة منعشة — نموذج عرض.",
+    type: "حمضيات",
+    size: "500 جم",
+    availability: "available",
+    createdAt: 0,
+  },
+  {
+    id: "demo-6",
+    name: "عسل صيفي",
+    shortDescription: "خيار متوازن ومناسب للهدايا — نموذج عرض.",
+    type: "موسمي",
+    size: "250 جم",
+    availability: "available",
+    createdAt: 0,
+  },
+];
+
 function isBrowser() {
   return typeof window !== "undefined";
 }
@@ -53,6 +111,23 @@ export function getProducts(): HoneyProduct[] {
   if (!isBrowser()) return [];
   const raw = safeParse(window.localStorage.getItem(STORAGE_KEY));
   return normalizeProducts(raw);
+}
+
+export function getAllProducts(): HoneyProduct[] {
+  const stored = getProducts();
+  const seen = new Set(stored.map((p) => p.id));
+  const merged = [...stored];
+  for (const p of demoProducts) {
+    if (!seen.has(p.id)) merged.push(p);
+  }
+  return merged;
+}
+
+export function getProductById(id: string): HoneyProduct | null {
+  if (!id) return null;
+  const stored = getProducts().find((p) => p.id === id);
+  if (stored) return stored;
+  return demoProducts.find((p) => p.id === id) ?? null;
 }
 
 export function saveProducts(products: HoneyProduct[]) {

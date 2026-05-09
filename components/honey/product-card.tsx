@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Droplet, ImageOff } from "lucide-react";
+import Link from "next/link";
 
 import { Badge } from "@/components/ui/badge";
 import { luxuryCardHover, luxuryEase, scaleIn, transitionHover } from "@/lib/motion";
@@ -27,18 +28,20 @@ export default function ProductCard({ product }: { product: HoneyProduct }) {
   const hasImage = Boolean(product.image);
 
   return (
-    <motion.article
-      variants={scaleIn}
-      whileHover={{
-        y: luxuryCardHover.y,
-        scale: luxuryCardHover.scale,
-        boxShadow: luxuryCardHover.boxShadow,
-        transition: { duration: transitionHover.duration, ease: luxuryEase },
-      }}
-      className="lux-card group relative overflow-hidden rounded-[1.75rem]"
-    >
+    <Link href={`/products/${product.id}`} className="block">
+      <motion.article
+        variants={scaleIn}
+        whileHover={{
+          y: luxuryCardHover.y,
+          scale: luxuryCardHover.scale,
+          boxShadow:
+            "0 34px 120px rgba(217,164,65,0.22), 0 22px 72px rgba(0,0,0,0.34)",
+          transition: { duration: transitionHover.duration, ease: luxuryEase },
+        }}
+        className="lux-card group relative cursor-pointer overflow-hidden rounded-[1.75rem]"
+      >
       <div className="pointer-events-none absolute -inset-px rounded-[1.75rem] opacity-[0.45] blur-2xl">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(212,166,58,0.22),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(217,164,65,0.22),transparent_60%)]" />
       </div>
 
       <div className="pointer-events-none absolute -inset-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
@@ -77,8 +80,8 @@ export default function ProductCard({ product }: { product: HoneyProduct }) {
                       عسل فاخر
                     </span>
                   </motion.div>
-                  <div className="mt-4 flex items-center justify-center gap-2 text-sm text-[rgba(255,243,214,0.72)]">
-                    <ImageOff className="size-4 text-[#D4A63A]" />
+                  <div className="mt-4 flex items-center justify-center gap-2 text-sm text-[#CBB89A]">
+                    <ImageOff className="size-4 text-[#D9A441]" />
                     <span>سيتم إضافة صورة المنتج لاحقًا</span>
                   </div>
                 </div>
@@ -90,14 +93,14 @@ export default function ProductCard({ product }: { product: HoneyProduct }) {
         <div className="absolute top-4 right-4 left-4 flex items-center justify-between gap-2">
           <Badge
             className={cn(
-              "rounded-full border border-[rgba(212,166,58,0.28)] bg-[rgba(17,17,17,0.55)] text-[rgba(255,243,214,0.86)] backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,247,214,0.10)_inset]",
-              available ? "text-[rgba(255,243,214,0.92)]" : "text-[rgba(255,243,214,0.62)]",
+              "rounded-full border border-[rgba(217,164,65,0.25)] bg-[rgba(11,9,6,0.55)] text-[#FFF3D6] backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,243,214,0.10)_inset]",
+              available ? "text-[#FFF3D6]" : "text-[#CBB89A]",
             )}
           >
             {available ? "متوفر" : "غير متوفر"}
           </Badge>
           {price ? (
-            <Badge className="rounded-full border border-[rgba(212,166,58,0.28)] bg-[rgba(17,17,17,0.55)] text-[#D4A63A] backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,247,214,0.10)_inset]">
+            <Badge className="rounded-full border border-[rgba(217,164,65,0.25)] bg-[rgba(11,9,6,0.55)] text-[#D9A441] backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,243,214,0.10)_inset]">
               {price}
             </Badge>
           ) : null}
@@ -116,17 +119,18 @@ export default function ProductCard({ product }: { product: HoneyProduct }) {
 
         <div className="mt-5 flex flex-wrap gap-2 text-xs">
           {product.type ? (
-            <span className="rounded-full border border-[rgba(212,166,58,0.24)] bg-[rgba(17,17,17,0.5)] px-3 py-1 text-[rgba(255,243,214,0.78)] backdrop-blur">
+            <span className="rounded-full border border-[rgba(217,164,65,0.25)] bg-[rgba(11,9,6,0.5)] px-3 py-1 text-[#CBB89A] backdrop-blur">
               النوع: {product.type}
             </span>
           ) : null}
           {product.size ? (
-            <span className="rounded-full border border-[rgba(212,166,58,0.24)] bg-[rgba(17,17,17,0.5)] px-3 py-1 text-[rgba(255,243,214,0.78)] backdrop-blur">
+            <span className="rounded-full border border-[rgba(217,164,65,0.25)] bg-[rgba(11,9,6,0.5)] px-3 py-1 text-[#CBB89A] backdrop-blur">
               الحجم: {product.size}
             </span>
           ) : null}
         </div>
       </div>
-    </motion.article>
+      </motion.article>
+    </Link>
   );
 }

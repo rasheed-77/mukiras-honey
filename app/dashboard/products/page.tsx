@@ -31,7 +31,7 @@ const initialForm: ProductFormState = {
 };
 
 function inputClassName() {
-  return "mt-2 w-full rounded-xl border border-border/60 bg-background/30 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-ring";
+  return "mt-2 w-full rounded-xl border border-[rgba(217,164,65,0.25)] bg-[rgba(11,9,6,0.55)] px-4 py-3 text-sm text-[#FFF3D6] outline-none placeholder:text-[#CBB89A] focus:ring-2 focus:ring-[rgba(217,164,65,0.35)]";
 }
 
 function labelClassName() {
@@ -147,7 +147,7 @@ export default function ProductsDashboardPage() {
         >
           <motion.section
             variants={scaleIn}
-            className="rounded-3xl border border-border/60 bg-card/40 p-6 shadow-[0_0_0_1px_rgba(217,164,65,0.06)_inset] sm:p-8"
+            className="lux-card relative rounded-3xl p-6 sm:p-8"
           >
             <h2 className="text-xl font-semibold tracking-tight">
               {editingId ? "تعديل منتج" : "إضافة منتج"}
@@ -262,7 +262,7 @@ export default function ProductsDashboardPage() {
 
           <motion.section
             variants={scaleIn}
-            className="rounded-3xl border border-border/60 bg-card/40 p-6 shadow-[0_0_0_1px_rgba(217,164,65,0.06)_inset] sm:p-8"
+            className="lux-card relative rounded-3xl p-6 sm:p-8"
           >
             <div className="flex items-center justify-between gap-4">
               <h2 className="text-xl font-semibold tracking-tight">المنتجات المضافة</h2>
@@ -276,7 +276,7 @@ export default function ProductsDashboardPage() {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.45, ease: luxuryEase }}
-                className="mt-6 rounded-2xl border border-border/60 bg-background/20 p-6 text-center"
+                className="lux-card relative mt-6 rounded-2xl p-6 text-center"
               >
                 <div className="font-semibold">لا توجد منتجات محفوظة بعد</div>
                 <div className="text-muted-foreground mt-2 text-sm">
@@ -293,10 +293,11 @@ export default function ProductsDashboardPage() {
                     transition={{ duration: 0.4, ease: luxuryEase }}
                     whileHover={{
                       y: -3,
-                      boxShadow: "0 18px 48px rgba(0,0,0,0.38)",
+                      boxShadow:
+                        "0 34px 120px rgba(217,164,65,0.22), 0 22px 72px rgba(0,0,0,0.34)",
                       transition: { duration: 0.35, ease: luxuryEase },
                     }}
-                    className="rounded-2xl border border-border/60 bg-background/20 p-5"
+                    className="lux-card relative rounded-2xl p-5"
                   >
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                       <div className="min-w-0">

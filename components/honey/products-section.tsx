@@ -7,65 +7,7 @@ import ProductCard from "@/components/honey/product-card";
 import { Section } from "@/components/ui/section";
 import { fadeInUp, staggerContainer } from "@/lib/motion";
 import type { HoneyProduct } from "@/lib/products";
-import { getProducts, subscribeToProducts } from "@/lib/products";
-
-const demoProducts: HoneyProduct[] = [
-  {
-    id: "demo-1",
-    name: "عسل سدر فاخر",
-    shortDescription: "قوام غني ونكهة مميزة — نموذج عرض.",
-    type: "سدر",
-    size: "500 جم",
-    price: 0,
-    availability: "available",
-    createdAt: 0,
-  },
-  {
-    id: "demo-2",
-    name: "عسل طلح",
-    shortDescription: "اختيار يمني أصيل بمذاق متوازن — نموذج عرض.",
-    type: "طلح",
-    size: "250 جم",
-    availability: "available",
-    createdAt: 0,
-  },
-  {
-    id: "demo-3",
-    name: "عسل زهور برية",
-    shortDescription: "قوام عميق ورائحة غنية — نموذج عرض.",
-    type: "زهور",
-    size: "1 كجم",
-    availability: "unavailable",
-    createdAt: 0,
-  },
-  {
-    id: "demo-4",
-    name: "عسل جبلي",
-    shortDescription: "نقاء ودفء بنكهة جبلية — نموذج عرض.",
-    type: "جبلي",
-    size: "500 جم",
-    availability: "available",
-    createdAt: 0,
-  },
-  {
-    id: "demo-5",
-    name: "عسل الحمضيات",
-    shortDescription: "عطر لطيف ولمسة منعشة — نموذج عرض.",
-    type: "حمضيات",
-    size: "500 جم",
-    availability: "available",
-    createdAt: 0,
-  },
-  {
-    id: "demo-6",
-    name: "عسل صيفي",
-    shortDescription: "خيار متوازن ومناسب للهدايا — نموذج عرض.",
-    type: "موسمي",
-    size: "250 جم",
-    availability: "available",
-    createdAt: 0,
-  },
-];
+import { demoProducts, getProducts, subscribeToProducts } from "@/lib/products";
 
 const gridViewport = { once: true, margin: "-48px" as const, amount: 0.15 };
 

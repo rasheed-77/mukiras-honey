@@ -63,15 +63,15 @@ export default function Contact() {
           whileInView="visible"
           viewport={viewport}
           transition={{ delay: 0.08 }}
-          className="rounded-3xl border border-border/60 bg-card/40 p-6"
+          className="luxury-card relative rounded-3xl p-6"
         >
-          <div className="text-primary text-sm font-medium">ملاحظة</div>
-          <div className="mt-2 text-sm leading-relaxed text-muted-foreground">
+          <div className="text-sm font-medium text-[#D9A441]">ملاحظة</div>
+          <div className="mt-2 text-sm leading-relaxed text-[#CBB89A]">
             هذا الموقع للعرض فقط بدون سلة شراء أو دفع إلكتروني. إدارة المنتجات تتم
             من لوحة بسيطة على{" "}
             <a
               href="/dashboard/products"
-              className="text-foreground underline underline-offset-4"
+              className="text-[#FFF3D6] underline underline-offset-4"
             >
               لوحة المنتجات
             </a>
