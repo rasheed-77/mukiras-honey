@@ -1,14 +1,19 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 
 import { Section } from "@/components/ui/section";
 import { fadeInUp, luxuryEase, scaleIn, staggerContainer } from "@/lib/motion";
+import { useMobileLite } from "@/lib/use-mobile-lite";
 
 const viewport = { once: true, margin: "-48px" as const, amount: 0.15 };
 
 export default function About() {
+  const mobileLite = useMobileLite();
+  const reducedMotion = useReducedMotion();
+  const lite = mobileLite || reducedMotion;
+
   return (
     <Section id="about">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -21,14 +26,18 @@ export default function About() {
             className="order-1 lg:order-1"
           >
             <motion.div
-              whileHover={{ scale: 1.015 }}
+              whileHover={lite ? undefined : { scale: 1.015 }}
               transition={{ duration: 0.75, ease: luxuryEase }}
               className="luxury-card group relative overflow-hidden rounded-3xl"
             >
               <motion.div
-                className="pointer-events-none absolute -inset-8 opacity-70 blur-3xl"
-                animate={{ opacity: [0.55, 0.8, 0.55], scale: [1, 1.03, 1] }}
-                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                className="pointer-events-none absolute -inset-8 opacity-60 blur-xl max-md:opacity-45 md:opacity-70 md:blur-3xl"
+                animate={
+                  lite ? undefined : { opacity: [0.55, 0.8, 0.55], scale: [1, 1.03, 1] }
+                }
+                transition={
+                  lite ? undefined : { duration: 10, repeat: Infinity, ease: "easeInOut" }
+                }
                 aria-hidden
               >
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_35%_20%,rgba(217,164,65,0.22),transparent_58%)]" />
@@ -41,7 +50,7 @@ export default function About() {
                   alt="مناحل مكيراس"
                   fill
                   priority={false}
-                  sizes="(max-width: 1023px) 100vw, 45vw"
+                  sizes="(max-width: 767px) 100vw, (max-width: 1023px) 90vw, 45vw"
                   className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.06]"
                 />
                 {/* cinematic overlays */}

@@ -46,10 +46,10 @@ export default function Navbar() {
     <motion.header
       initial={false}
       className={cn(
-        "sticky top-0 z-50 border-b backdrop-blur-xl transition-[background-color,box-shadow,border-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+        "sticky top-0 z-50 border-b backdrop-blur-md transition-[background-color,box-shadow,border-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:backdrop-blur-xl",
         elevated
-          ? "border-[rgba(201,154,46,0.38)] bg-[#080604]/96 shadow-[0_18px_60px_rgba(0,0,0,0.55)] backdrop-blur-2xl"
-          : "border-[rgba(201,154,46,0.22)] bg-[#080604]/94 backdrop-blur-xl",
+          ? "border-[rgba(201,154,46,0.38)] bg-[#080604]/96 shadow-[0_12px_36px_rgba(0,0,0,0.42)] backdrop-blur-lg md:shadow-[0_18px_60px_rgba(0,0,0,0.55)] md:backdrop-blur-2xl"
+          : "border-[rgba(201,154,46,0.22)] bg-[#080604]/94 backdrop-blur-md md:backdrop-blur-xl",
       )}
     >
       <div className="mx-auto flex h-[82px] max-w-7xl items-center justify-between px-6 lg:px-10">

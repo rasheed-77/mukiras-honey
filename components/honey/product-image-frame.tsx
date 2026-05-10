@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import { cn } from "@/lib/utils";
 
 import { ProductImageFloat } from "./product-image-float";
@@ -93,16 +95,16 @@ export function ProductImageFrame({
       {/* Glow ذهبي خلف العبوة — يزداد بسلاسة عند hover */}
       <div
         className={cn(
-          "pointer-events-none absolute left-1/2 z-[2] -translate-x-1/2 rounded-full blur-3xl transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
+          "pointer-events-none absolute left-1/2 z-[2] -translate-x-1/2 rounded-full blur-lg transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] md:blur-3xl",
           theme === "honey" &&
             "bg-[radial-gradient(circle,rgba(217,164,65,0.42)_0%,rgba(217,164,65,0.12)_38%,transparent_68%)]",
           theme === "nuts" &&
             "bg-[radial-gradient(circle,rgba(170,120,65,0.32)_0%,rgba(100,65,30,0.1)_40%,transparent_68%)] max-md:opacity-90",
           theme === "mixes" &&
             "bg-[radial-gradient(circle,rgba(90,150,110,0.22)_0%,rgba(217,164,65,0.14)_36%,transparent_68%)]",
-          "top-[44%] h-[min(58%,240px)] w-[min(88%,320px)] -translate-y-1/2 opacity-[0.38] group-hover:opacity-[0.58]",
+          "top-[44%] h-[min(58%,240px)] w-[min(88%,320px)] -translate-y-1/2 opacity-[0.32] group-hover:opacity-[0.52] max-md:opacity-[0.26] md:opacity-[0.38] md:group-hover:opacity-[0.58]",
           isDetail &&
-            "h-[min(62%,280px)] w-[min(84%,380px)] opacity-[0.42] group-hover:opacity-[0.62]",
+            "h-[min(62%,280px)] w-[min(84%,380px)] max-md:opacity-[0.28] md:opacity-[0.42] md:group-hover:opacity-[0.62]",
         )}
         aria-hidden
       />
@@ -110,7 +112,7 @@ export function ProductImageFrame({
       {/* ثانوي: وهج أضيق أوضح قليلًا */}
       <div
         className={cn(
-          "pointer-events-none absolute left-1/2 top-[46%] z-[2] h-[42%] w-[48%] max-w-[220px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-2xl transition-opacity duration-700 ease-out group-hover:opacity-95",
+          "pointer-events-none absolute left-1/2 top-[46%] z-[2] h-[42%] w-[48%] max-w-[220px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-md transition-opacity duration-700 ease-out group-hover:opacity-95 md:blur-2xl",
           theme === "mixes"
             ? "bg-[radial-gradient(circle,rgba(140,190,150,0.12)_0%,transparent_62%)] opacity-65 max-md:opacity-50"
             : theme === "nuts"
@@ -137,16 +139,16 @@ export function ProductImageFrame({
       {/* ظل اتصال ناعم تحت العبوة */}
       <div
         className={cn(
-          "pointer-events-none absolute left-1/2 z-[3] -translate-x-1/2 rounded-[100%] bg-[radial-gradient(ellipse,rgba(217,164,65,0.28),rgba(0,0,0,0.45)_40%,transparent_72%)] opacity-85 blur-xl transition-opacity duration-700 ease-out group-hover:opacity-100",
+          "pointer-events-none absolute left-1/2 z-[3] -translate-x-1/2 rounded-[100%] bg-[radial-gradient(ellipse,rgba(217,164,65,0.28),rgba(0,0,0,0.45)_40%,transparent_72%)] opacity-80 blur-md transition-opacity duration-700 ease-out group-hover:opacity-100 md:opacity-85 md:blur-xl",
           "bottom-[7%] h-[12%] w-[min(74%,280px)]",
-          isDetail && "bottom-[8%] h-[14%] w-[min(68%,320px)] blur-[26px]",
+          isDetail && "bottom-[8%] h-[14%] w-[min(68%,320px)] max-md:blur-sm md:blur-[26px]",
         )}
         aria-hidden
       />
 
       {/* Glass reflection — لمعة زجاجية خفيفة أسفل العبوة */}
       <div
-        className="pointer-events-none absolute inset-x-[20%] bottom-[11%] z-[5] h-[20%] max-h-[140px] rounded-[999px] bg-[linear-gradient(to_top,rgba(255,252,245,0.09)_0%,rgba(255,245,230,0.03)_42%,transparent_100%)] opacity-[0.45] mix-blend-soft-light transition-opacity duration-700 ease-out group-hover:opacity-[0.62] sm:inset-x-[22%]"
+        className="pointer-events-none absolute inset-x-[20%] bottom-[11%] z-[5] h-[20%] max-h-[140px] rounded-[999px] bg-[linear-gradient(to_top,rgba(255,252,245,0.09)_0%,rgba(255,245,230,0.03)_42%,transparent_100%)] opacity-[0.22] mix-blend-soft-light transition-opacity duration-700 ease-out group-hover:opacity-[0.62] max-md:hidden sm:inset-x-[22%] md:opacity-[0.45]"
         aria-hidden
       />
 
@@ -158,29 +160,38 @@ export function ProductImageFrame({
         )}
       >
         <ProductImageFloat>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={src}
             alt={alt}
+            width={720}
+            height={960}
+            sizes={
+              isDetail
+                ? "(max-width: 767px) 92vw, (max-width: 1024px) 50vw, 560px"
+                : "(max-width: 767px) 82vw, (max-width: 1280px) 38vw, 300px"
+            }
             decoding="async"
+            draggable={false}
             className={cn(
               "relative z-[2] h-auto w-auto max-w-full object-contain object-center",
-              "transition-[transform,filter] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform",
-              "[filter:drop-shadow(0_18px_36px_rgba(0,0,0,0.45))_drop-shadow(0_8px_24px_rgba(0,0,0,0.28))_drop-shadow(0_0_36px_rgba(217,164,65,0.18))]",
-              "motion-safe:group-hover:[filter:drop-shadow(0_22px_44px_rgba(0,0,0,0.5))_drop-shadow(0_10px_28px_rgba(0,0,0,0.3))_drop-shadow(0_0_48px_rgba(217,164,65,0.28))_drop-shadow(0_0_72px_rgba(217,164,65,0.08))]",
-              "motion-safe:group-hover:-translate-y-1 motion-safe:group-hover:scale-[1.02]",
+              "transition-[transform,filter] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-auto md:will-change-transform",
+              "max-md:[filter:drop-shadow(0_10px_22px_rgba(0,0,0,0.38))_drop-shadow(0_0_18px_rgba(217,164,65,0.12))]",
+              "md:[filter:drop-shadow(0_18px_36px_rgba(0,0,0,0.45))_drop-shadow(0_8px_24px_rgba(0,0,0,0.28))_drop-shadow(0_0_36px_rgba(217,164,65,0.18))]",
+              "motion-safe:group-hover:md:[filter:drop-shadow(0_22px_44px_rgba(0,0,0,0.5))_drop-shadow(0_10px_28px_rgba(0,0,0,0.3))_drop-shadow(0_0_48px_rgba(217,164,65,0.28))_drop-shadow(0_0_72px_rgba(217,164,65,0.08))]",
+              "motion-safe:group-hover:max-md:[filter:drop-shadow(0_12px_26px_rgba(0,0,0,0.42))_drop-shadow(0_0_22px_rgba(217,164,65,0.16))]",
+              "motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:md:-translate-y-1 motion-safe:group-hover:md:scale-[1.02]",
               isDetail
-                ? "max-h-[min(50vh,440px)] sm:max-h-[min(52vh,480px)]"
-                : "max-h-[calc(100%-0.25rem)]",
+                ? "max-h-[min(34vh,200px)] sm:max-h-[min(50vh,440px)] lg:max-h-[min(52vh,480px)]"
+                : "max-h-[140px] sm:max-h-[calc(100%-0.25rem)]",
               imgClassName,
             )}
           />
         </ProductImageFloat>
       </div>
 
-      {/* انعكاس مرآة خفيف — تحت الصورة */}
+      {/* انعكاس مرآة خفيف — تحت الصورة (معطّل على الموبايل لتوفير الرسم) */}
       <div
-        className="pointer-events-none absolute inset-x-[14%] bottom-0 z-[4] h-[22%] overflow-hidden sm:inset-x-[16%]"
+        className="pointer-events-none absolute inset-x-[14%] bottom-0 z-[4] hidden h-[22%] overflow-hidden md:block sm:inset-x-[16%]"
         aria-hidden
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -204,8 +215,8 @@ export function ProductImageFrame({
         className={cn(
           "pointer-events-none absolute inset-0 z-[11] rounded-[inherit]",
           isDetail
-            ? "shadow-[inset_0_0_56px_28px_rgba(0,0,0,0.45),inset_0_0_100px_rgba(217,164,65,0.04)]"
-            : "shadow-[inset_0_0_40px_18px_rgba(0,0,0,0.38),inset_0_0_64px_rgba(217,164,65,0.03)]",
+            ? "shadow-[inset_0_0_28px_14px_rgba(0,0,0,0.38)] md:shadow-[inset_0_0_56px_28px_rgba(0,0,0,0.45),inset_0_0_100px_rgba(217,164,65,0.04)]"
+            : "shadow-[inset_0_0_22px_12px_rgba(0,0,0,0.34)] md:shadow-[inset_0_0_40px_18px_rgba(0,0,0,0.38),inset_0_0_64px_rgba(217,164,65,0.03)]",
         )}
         aria-hidden
       />

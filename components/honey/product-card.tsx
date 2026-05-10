@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Droplet, ImageOff } from "lucide-react";
 import Link from "next/link";
 
@@ -8,6 +8,7 @@ import { ProductImageFrame } from "@/components/honey/product-image-frame";
 import { Badge } from "@/components/ui/badge";
 import { luxuryCardHover, luxuryEase, scaleIn, transitionHover } from "@/lib/motion";
 import { type HoneyProduct, isNaturalMixProduct, isNutProduct } from "@/lib/products";
+import { useMobileLite } from "@/lib/use-mobile-lite";
 import { cn } from "@/lib/utils";
 
 function formatPrice(price?: number) {
@@ -32,21 +33,28 @@ export default function ProductCard({ product }: { product: HoneyProduct }) {
     : isNaturalMixProduct(product)
       ? "mixes"
       : "honey";
+  const mobileLite = useMobileLite();
+  const reducedMotion = useReducedMotion();
+  const lite = mobileLite || reducedMotion;
 
   return (
     <Link href={`/products/${product.id}`} className="block">
       <motion.article
         variants={scaleIn}
-        whileHover={{
-          y: luxuryCardHover.y,
-          scale: luxuryCardHover.scale,
-          boxShadow:
-            "0 34px 120px rgba(217,164,65,0.22), 0 22px 72px rgba(0,0,0,0.34)",
-          transition: { duration: transitionHover.duration, ease: luxuryEase },
-        }}
+        whileHover={
+          lite
+            ? undefined
+            : {
+                y: luxuryCardHover.y,
+                scale: luxuryCardHover.scale,
+                boxShadow:
+                  "0 34px 120px rgba(217,164,65,0.22), 0 22px 72px rgba(0,0,0,0.34)",
+                transition: { duration: transitionHover.duration, ease: luxuryEase },
+              }
+        }
         className="lux-card group relative cursor-pointer overflow-hidden rounded-[1.75rem]"
       >
-      <div className="pointer-events-none absolute -inset-px rounded-[1.75rem] opacity-[0.45] blur-2xl">
+      <div className="pointer-events-none absolute -inset-px rounded-[1.75rem] opacity-[0.34] blur-xl md:opacity-[0.45] md:blur-2xl">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(217,164,65,0.22),transparent_60%)]" />
       </div>
 

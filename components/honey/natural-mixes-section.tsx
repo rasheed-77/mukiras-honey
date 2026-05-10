@@ -26,10 +26,10 @@ export default function NaturalMixesSection() {
       id="natural-mixes"
       className="relative mt-14 overflow-hidden border-t border-[rgba(201,154,46,0.26)] bg-[linear-gradient(172deg,#060504_0%,#18140f_46%,#0a0907_100%)] py-16 text-[#f6eee0] sm:mt-20 sm:py-20 md:mt-24 md:py-28"
     >
-      <div className="pointer-events-none absolute inset-0 opacity-95">
-        <div className="absolute left-[8%] top-[18%] h-[45%] w-[42%] rounded-full bg-[radial-gradient(circle,rgba(235,200,120,0.11),transparent_68%)] blur-3xl" />
-        <div className="absolute bottom-[6%] right-[6%] h-[52%] w-[46%] rounded-full bg-[radial-gradient(circle,rgba(217,164,65,0.13),transparent_66%)] blur-3xl" />
-        <div className="absolute inset-x-0 top-0 h-[42%] bg-[radial-gradient(ellipse_95%_70%_at_50%_0%,rgba(255,248,230,0.05),transparent_62%)]" />
+      <div className="pointer-events-none absolute inset-0 opacity-78 md:opacity-95">
+        <div className="absolute left-[8%] top-[18%] hidden h-[45%] w-[42%] rounded-full bg-[radial-gradient(circle,rgba(235,200,120,0.11),transparent_68%)] blur-xl md:block md:blur-3xl" />
+        <div className="absolute bottom-[6%] right-[6%] hidden h-[52%] w-[46%] rounded-full bg-[radial-gradient(circle,rgba(217,164,65,0.13),transparent_66%)] blur-xl md:block md:blur-3xl" />
+        <div className="absolute inset-x-0 top-0 h-[42%] bg-[radial-gradient(ellipse_95%_70%_at_50%_0%,rgba(255,248,230,0.05),transparent_62%)] opacity-80 max-md:opacity-45 md:opacity-100" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -48,7 +48,7 @@ export default function NaturalMixesSection() {
         </motion.div>
 
         <motion.div
-          className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
+          className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"

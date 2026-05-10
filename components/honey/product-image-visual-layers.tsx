@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useId } from "react";
 
 import { cn } from "@/lib/utils";
+import { useMobileLite } from "@/lib/use-mobile-lite";
 
 export type ProductVisualTheme = "honey" | "nuts" | "mixes";
 
@@ -16,8 +17,10 @@ export function ProductVisualLayers({
   isDetail: boolean;
 }) {
   const reduceMotion = useReducedMotion();
+  const mobileLite = useMobileLite();
+  const motionOff = reduceMotion || mobileLite;
   const uid = useId().replace(/:/g, "");
-  const soft = "max-md:opacity-[0.55] max-md:[&_svg]:scale-[0.92]";
+  const soft = "max-md:opacity-[0.5] max-md:[&_svg]:scale-[0.88]";
 
   const inner =
     theme === "honey" ? (
@@ -40,9 +43,9 @@ export function ProductVisualLayers({
     <motion.div
       className="pointer-events-none absolute inset-0 z-[1]"
       aria-hidden
-      animate={reduceMotion ? undefined : { opacity: pulseOpacity }}
+      animate={motionOff ? undefined : { opacity: pulseOpacity }}
       transition={
-        reduceMotion
+        motionOff
           ? undefined
           : {
               duration: theme === "honey" ? 5.5 : 7.5,
@@ -74,23 +77,23 @@ function HoneyWarmLayers({
         className={cn(
           "absolute left-1/2 top-[58%] h-[min(70%,320px)] w-[min(95%,340px)] -translate-x-1/2 -translate-y-1/2 rounded-full",
           "bg-[radial-gradient(ellipse_75%_65%_at_50%_60%,rgba(255,160,60,0.22),rgba(245,130,30,0.1)_45%,transparent_68%)]",
-          "blur-3xl motion-safe:animate-theme-honey-warm-pulse opacity-70",
-          "transition-opacity duration-700 ease-out group-hover:opacity-100 max-md:blur-2xl max-md:opacity-50",
+          "blur-lg motion-safe:animate-theme-honey-warm-pulse opacity-70 max-md:!animate-none md:blur-3xl",
+          "transition-opacity duration-700 ease-out group-hover:opacity-100 max-md:opacity-40",
           isDetail && "top-[55%] opacity-75",
         )}
       />
       <div
         className={cn(
           "absolute left-1/2 top-[52%] h-[min(50%,220px)] w-[min(72%,260px)] -translate-x-1/2 -translate-y-1/2 rounded-full",
-          "bg-[radial-gradient(circle,rgba(251,191,36,0.18),transparent_62%)] blur-2xl",
-          "motion-safe:animate-theme-honey-warm-pulse motion-safe:[animation-delay:0.6s] opacity-60 group-hover:opacity-90",
-          "max-md:opacity-40",
+          "bg-[radial-gradient(circle,rgba(251,191,36,0.18),transparent_62%)] blur-xl md:blur-2xl",
+          "motion-safe:animate-theme-honey-warm-pulse motion-safe:[animation-delay:0.6s] opacity-60 group-hover:opacity-90 max-md:!animate-none",
+          "max-md:opacity-32",
         )}
       />
 
       {/* أشكال لهب ناعمة SVG */}
       <svg
-        className="absolute bottom-[8%] left-1/2 w-[min(78%,240px)] max-w-[240px] -translate-x-1/2 opacity-[0.14] max-md:bottom-[10%] max-md:w-[min(85%,200px)] max-md:opacity-[0.1]"
+        className="absolute bottom-[8%] left-1/2 hidden w-[min(78%,240px)] max-w-[240px] -translate-x-1/2 opacity-[0.14] md:block"
         viewBox="0 0 120 140"
         preserveAspectRatio="xMidYMax meet"
       >
@@ -131,7 +134,7 @@ function HoneyWarmLayers({
           key={i}
           className={cn(
             "absolute h-1 w-1 rounded-full bg-[rgba(253,224,180,0.55)] shadow-[0_0_8px_rgba(251,191,36,0.45)]",
-            "motion-safe:animate-theme-particle-twinkle max-md:h-0.5 max-md:w-0.5 max-md:opacity-40",
+            "motion-safe:animate-theme-particle-twinkle max-md:hidden md:h-1 md:w-1",
           )}
           style={{ top: d.t, left: d.l, animationDelay: d.d }}
         />
@@ -148,7 +151,7 @@ function NutsEarthyLayers({ className }: { className?: string }) {
         className={cn(
           "absolute inset-x-0 bottom-0 top-[38%] opacity-[0.55]",
           "bg-[radial-gradient(ellipse_90%_85%_at_50%_100%,rgba(120,80,40,0.18),rgba(60,40,20,0.08)_50%,transparent_68%)]",
-          "blur-2xl motion-safe:animate-theme-earth-glow max-md:opacity-35",
+          "blur-xl motion-safe:animate-theme-earth-glow max-md:!animate-none max-md:opacity-28 md:blur-2xl",
         )}
       />
       <div
@@ -161,7 +164,7 @@ function NutsEarthyLayers({ className }: { className?: string }) {
 
       {/* نسيج خشبي خفيف */}
       <div
-        className="absolute inset-0 opacity-[0.14] mix-blend-soft-light max-md:opacity-[0.09]"
+        className="absolute inset-0 opacity-[0.14] mix-blend-soft-light max-md:opacity-[0.06]"
         style={{
           backgroundImage: `repeating-linear-gradient(
             105deg,
@@ -190,7 +193,7 @@ function NutsEarthyLayers({ className }: { className?: string }) {
       ].map((d, i) => (
         <span
           key={i}
-          className="absolute h-[3px] w-[3px] rounded-full bg-[rgba(222,184,120,0.4)] blur-[0.5px] motion-safe:animate-theme-dust-drift max-md:opacity-50"
+          className="absolute hidden h-[3px] w-[3px] rounded-full bg-[rgba(222,184,120,0.4)] blur-[0.5px] motion-safe:animate-theme-dust-drift md:block"
           style={{
             top: d.t,
             left: d.l,
@@ -201,7 +204,7 @@ function NutsEarthyLayers({ className }: { className?: string }) {
 
       {/* ورقة صغيرة SVG */}
       <svg
-        className="absolute right-[6%] top-[14%] w-12 opacity-[0.16] max-md:right-[4%] max-md:top-[12%] max-md:w-9 max-md:opacity-[0.11]"
+        className="absolute right-[6%] top-[14%] hidden w-12 opacity-[0.16] md:block"
         viewBox="0 0 48 48"
         fill="none"
       >
@@ -223,13 +226,13 @@ function MixesBotanicalLayers({ className }: { className?: string }) {
         className={cn(
           "absolute inset-x-0 bottom-[15%] top-[25%] opacity-70",
           "bg-[radial-gradient(ellipse_80%_70%_at_50%_55%,rgba(34,120,80,0.12),rgba(217,164,65,0.08)_45%,transparent_70%)]",
-          "blur-3xl motion-safe:animate-theme-mixes-glow max-md:opacity-45",
+          "blur-xl motion-safe:animate-theme-mixes-glow max-md:!animate-none max-md:opacity-35 md:blur-3xl",
         )}
       />
 
       {/* خطوط بوتانية */}
       <svg
-        className="absolute inset-0 h-full w-full opacity-[0.12] motion-safe:animate-theme-mixes-drift max-md:opacity-[0.08]"
+        className="absolute inset-0 h-full w-full opacity-[0.12] motion-safe:animate-theme-mixes-drift max-md:!animate-none max-md:opacity-[0.05] md:opacity-[0.12]"
         viewBox="0 0 200 200"
         preserveAspectRatio="none"
       >
@@ -249,7 +252,7 @@ function MixesBotanicalLayers({ className }: { className?: string }) {
 
       {/* زهرة تخطيطية خفيفة */}
       <svg
-        className="absolute bottom-[12%] left-1/2 w-[min(50%,180px)] -translate-x-1/2 opacity-[0.1] max-md:bottom-[14%] max-md:w-[min(55%,140px)] max-md:opacity-[0.07]"
+        className="absolute bottom-[12%] left-1/2 hidden w-[min(50%,180px)] -translate-x-1/2 opacity-[0.1] md:block"
         viewBox="0 0 100 100"
       >
         <g className="motion-safe:animate-theme-mixes-drift motion-safe:[animation-duration:12s]">
@@ -279,7 +282,7 @@ function MixesBotanicalLayers({ className }: { className?: string }) {
       ].map((d, i) => (
         <span
           key={i}
-          className="absolute h-1 w-1 rounded-full bg-[rgba(140,200,150,0.35)] shadow-[0_0_6px_rgba(217,164,65,0.25)] motion-safe:animate-theme-particle-twinkle max-md:opacity-40"
+          className="absolute hidden h-1 w-1 rounded-full bg-[rgba(140,200,150,0.35)] shadow-[0_0_6px_rgba(217,164,65,0.25)] motion-safe:animate-theme-particle-twinkle md:block"
           style={{ top: d.t, left: d.l, animationDelay: `${i * 0.5}s` }}
         />
       ))}

@@ -1,5 +1,5 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Droplet, Leaf, ShieldCheck, Sparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,6 +12,7 @@ import {
   luxuryEase,
   staggerContainer,
 } from "@/lib/motion";
+import { useMobileLite } from "@/lib/use-mobile-lite";
 
 const stats = [
   { k: "طبيعي 100%", Icon: Leaf },
@@ -611,6 +612,10 @@ function HeroCurvesSVG({ className }: { className?: string }) {
 }
 
 export default function Hero() {
+  const mobileLite = useMobileLite();
+  const reducedMotion = useReducedMotion();
+  const lite = mobileLite || reducedMotion;
+
   return (
     <section
       id="home"
@@ -630,7 +635,7 @@ export default function Hero() {
       />
       {/* Cinematic light rays like reference */}
       <div
-        className="pointer-events-none absolute inset-0 z-0 opacity-[0.42] [background:conic-gradient(from_220deg_at_42%_6%,rgba(255,244,214,0.0)_0deg,rgba(255,244,214,0.16)_26deg,rgba(217,164,65,0.12)_62deg,rgba(255,244,214,0.0)_120deg,rgba(255,244,214,0.12)_170deg,rgba(255,244,214,0.0)_360deg)] blur-[1px]"
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.18] blur-[0.5px] [background:conic-gradient(from_220deg_at_42%_6%,rgba(255,244,214,0.0)_0deg,rgba(255,244,214,0.16)_26deg,rgba(217,164,65,0.12)_62deg,rgba(255,244,214,0.0)_120deg,rgba(255,244,214,0.12)_170deg,rgba(255,244,214,0.0)_360deg)] md:opacity-[0.42] md:blur-[1px]"
         aria-hidden
       />
       <div
@@ -638,9 +643,9 @@ export default function Hero() {
         aria-hidden
       />
 
-      {/* Honeycomb (z-1) — sides only (keeps text clean) */}
+      {/* Honeycomb (z-1) — sides only — مخفي على الموبايل */}
       <div
-        className="pointer-events-none absolute inset-y-0 left-0 z-[1] w-[32%] hero-honeycomb-layer"
+        className="pointer-events-none absolute inset-y-0 left-0 z-[1] hidden w-[32%] hero-honeycomb-layer md:block"
         style={{
           opacity: 0.06,
           maskImage: "linear-gradient(to right, black 0%, black 65%, transparent 100%)",
@@ -648,7 +653,7 @@ export default function Hero() {
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute inset-y-0 right-0 z-[1] w-[32%] hero-honeycomb-layer"
+        className="pointer-events-none absolute inset-y-0 right-0 z-[1] hidden w-[32%] hero-honeycomb-layer md:block"
         style={{
           opacity: 0.06,
           maskImage: "linear-gradient(to left, black 0%, black 65%, transparent 100%)",
@@ -656,157 +661,132 @@ export default function Hero() {
         aria-hidden
       />
 
-      {/* Bokeh Layer (C) — z-5 */}
-      <div className="pointer-events-none absolute inset-0 z-[5]" aria-hidden>
-        {Array.from({ length: 12 }).map((_, i) => {
-          const presets = [
-            { t: "14%", l: "18%", s: 280, o: 0.52, c: "#fff7d6" },
-            { t: "18%", l: "74%", s: 320, o: 0.48, c: "#f5c15a" },
-            { t: "32%", l: "6%", s: 220, o: 0.42, c: "#d99a2b" },
-            { t: "34%", l: "86%", s: 240, o: 0.44, c: "#fff7d6" },
-            { t: "46%", l: "24%", s: 190, o: 0.4, c: "#f5c15a" },
-            { t: "48%", l: "64%", s: 200, o: 0.4, c: "#d99a2b" },
-            { t: "24%", l: "44%", s: 380, o: 0.42, c: "#fff7d6" },
-            { t: "60%", l: "12%", s: 260, o: 0.38, c: "#d99a2b" },
-            { t: "62%", l: "82%", s: 270, o: 0.38, c: "#f5c15a" },
-            { t: "76%", l: "30%", s: 240, o: 0.4, c: "#fff7d6" },
-            { t: "78%", l: "64%", s: 250, o: 0.4, c: "#f5c15a" },
-            { t: "40%", l: "46%", s: 320, o: 0.4, c: "#d99a2b" },
-          ] as const;
-          const p = presets[i]!;
-          return (
+      {/* Bokeh — على الموبايل / تقليل الحركة: وهج ثابت خفيف فقط */}
+      {lite ? (
+        <div className="pointer-events-none absolute inset-0 z-[5]" aria-hidden>
+          <div className="absolute left-1/2 top-[30%] h-44 w-44 max-w-[55vw] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(217,164,65,0.14),transparent_72%)] blur-2xl opacity-90" />
+        </div>
+      ) : (
+        <div className="pointer-events-none absolute inset-0 z-[5]" aria-hidden>
+          {Array.from({ length: 12 }).map((_, i) => {
+            const presets = [
+              { t: "14%", l: "18%", s: 280, o: 0.52, c: "#fff7d6" },
+              { t: "18%", l: "74%", s: 320, o: 0.48, c: "#f5c15a" },
+              { t: "32%", l: "6%", s: 220, o: 0.42, c: "#d99a2b" },
+              { t: "34%", l: "86%", s: 240, o: 0.44, c: "#fff7d6" },
+              { t: "46%", l: "24%", s: 190, o: 0.4, c: "#f5c15a" },
+              { t: "48%", l: "64%", s: 200, o: 0.4, c: "#d99a2b" },
+              { t: "24%", l: "44%", s: 380, o: 0.42, c: "#fff7d6" },
+              { t: "60%", l: "12%", s: 260, o: 0.38, c: "#d99a2b" },
+              { t: "62%", l: "82%", s: 270, o: 0.38, c: "#f5c15a" },
+              { t: "76%", l: "30%", s: 240, o: 0.4, c: "#fff7d6" },
+              { t: "78%", l: "64%", s: 250, o: 0.4, c: "#f5c15a" },
+              { t: "40%", l: "46%", s: 320, o: 0.4, c: "#d99a2b" },
+            ] as const;
+            const p = presets[i]!;
+            return (
+              <motion.div
+                key={i}
+                className="absolute rounded-full blur-2xl md:blur-2xl"
+                style={{
+                  top: p.t,
+                  left: p.l,
+                  width: p.s,
+                  height: p.s,
+                  opacity: p.o,
+                  background: `radial-gradient(circle, ${p.c} 0%, rgba(255,255,255,0) 70%)`,
+                  transform: "translateZ(0)",
+                }}
+                animate={{ y: [0, -14, 0], x: [0, i % 2 === 0 ? 10 : -10, 0] }}
+                transition={{
+                  duration: 14 + i * 0.6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.12,
+                }}
+              />
+            );
+          })}
+          {[
+            { t: "24%", l: "10%", s: 520, o: 0.44, c: "#fff7d6", d: 0.06 },
+            { t: "26%", l: "76%", s: 580, o: 0.46, c: "#f5c15a", d: 0.14 },
+            { t: "40%", l: "86%", s: 460, o: 0.4, c: "#fff7d6", d: 0.22 },
+            { t: "52%", l: "6%", s: 420, o: 0.38, c: "#d99a2b", d: 0.3 },
+          ].map((p, idx) => (
             <motion.div
-              key={i}
-              className="absolute rounded-full blur-2xl"
+              key={`xl-${idx}`}
+              className="absolute rounded-full blur-3xl"
               style={{
                 top: p.t,
                 left: p.l,
                 width: p.s,
                 height: p.s,
                 opacity: p.o,
-                background: `radial-gradient(circle, ${p.c} 0%, rgba(255,255,255,0) 70%)`,
+                background: `radial-gradient(circle, ${p.c} 0%, rgba(255,255,255,0) 72%)`,
                 transform: "translateZ(0)",
               }}
-              animate={{ y: [0, -14, 0], x: [0, i % 2 === 0 ? 10 : -10, 0] }}
-              transition={{
-                duration: 14 + i * 0.6,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: i * 0.12,
-              }}
+              animate={{ y: [0, -18, 0], x: [0, idx % 2 === 0 ? 14 : -14, 0] }}
+              transition={{ duration: 16 + idx * 1.2, repeat: Infinity, ease: "easeInOut", delay: p.d }}
             />
-          );
-        })}
-        {/* Extra large bokeh left/right of title (matches reference glow dots) */}
-        {[
-          { t: "24%", l: "10%", s: 520, o: 0.44, c: "#fff7d6", d: 0.06 },
-          { t: "26%", l: "76%", s: 580, o: 0.46, c: "#f5c15a", d: 0.14 },
-          { t: "40%", l: "86%", s: 460, o: 0.4, c: "#fff7d6", d: 0.22 },
-          { t: "52%", l: "6%", s: 420, o: 0.38, c: "#d99a2b", d: 0.3 },
-        ].map((p, idx) => (
-          <motion.div
-            key={`xl-${idx}`}
-            className="absolute rounded-full blur-3xl"
-            style={{
-              top: p.t,
-              left: p.l,
-              width: p.s,
-              height: p.s,
-              opacity: p.o,
-              background: `radial-gradient(circle, ${p.c} 0%, rgba(255,255,255,0) 72%)`,
-              transform: "translateZ(0)",
-            }}
-            animate={{ y: [0, -18, 0], x: [0, idx % 2 === 0 ? 14 : -14, 0] }}
-            transition={{ duration: 16 + idx * 1.2, repeat: Infinity, ease: "easeInOut", delay: p.d }}
-          />
-        ))}
-
-        {/* Mobile-only bokeh (stronger, within requested opacity) */}
-        {[
-          { t: "22%", l: "6%", s: 220, o: 0.44, c: "#fff7d6", d: 0.05 },
-          { t: "24%", l: "70%", s: 260, o: 0.45, c: "#f5c15a", d: 0.12 },
-          { t: "38%", l: "78%", s: 210, o: 0.4, c: "#fff7d6", d: 0.2 },
-        ].map((p, idx) => (
-          <motion.div
-            key={`m-${idx}`}
-            className="absolute rounded-full blur-3xl sm:hidden"
-            style={{
-              top: p.t,
-              left: p.l,
-              width: p.s,
-              height: p.s,
-              opacity: p.o,
-              background: `radial-gradient(circle, ${p.c} 0%, rgba(255,255,255,0) 74%)`,
-              transform: "translateZ(0)",
-            }}
-            animate={{ y: [0, -14, 0], x: [0, idx % 2 === 0 ? 10 : -10, 0] }}
-            transition={{ duration: 14 + idx * 1.2, repeat: Infinity, ease: "easeInOut", delay: p.d }}
-          />
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       {/* Flowers/Waves + Jar Scene (B/D/A) */}
       <div className="hero-decorations">
-        {/* Golden waves bottom (D) — z-8 (passes behind stats via glass) */}
+        {/* Golden waves — مخفي على الموبايل */}
         <motion.div
-          className="absolute bottom-0 left-0 z-[8] h-72 w-full opacity-[0.72]"
+          className="absolute bottom-0 left-0 z-[8] hidden h-72 w-full opacity-[0.72] md:block"
           initial={{ opacity: 0 }}
-          animate={{ opacity: [0.55, 0.65, 0.55] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          animate={lite ? { opacity: 0.62 } : { opacity: [0.55, 0.65, 0.55] }}
+          transition={
+            lite ? { duration: 0.5 } : { duration: 12, repeat: Infinity, ease: "easeInOut" }
+          }
         >
           <GoldenWavesSVG />
         </motion.div>
 
-        {/* Luxury curved frame (subtle) — z-8 */}
-        <HeroCurvesSVG className="absolute inset-0 z-[8] h-full w-full min-h-[60vh] opacity-[0.55]" />
+        <HeroCurvesSVG className="absolute inset-0 z-[8] hidden h-full w-full min-h-[60vh] opacity-[0.55] md:block" />
 
-        {/* Golden ambient glow pulse behind content — z-8 */}
-        <motion.div
-          className="pointer-events-none absolute inset-0 z-[8] [mask-image:radial-gradient(ellipse_70%_55%_at_50%_42%,black,transparent_72%)]"
-          aria-hidden
-        >
+        {/* وهج ذهبي نابض — معطّل على الموبايل / تقليل الحركة */}
+        {!lite ? (
           <motion.div
-            className="absolute left-1/2 top-[38%] h-[52rem] w-[52rem] max-w-[min(52rem,100vw)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(217,164,65,0.36)_0%,rgba(255,243,214,0.18)_38%,transparent_68%)] blur-3xl"
-            variants={ambientGlowPulse}
-            initial="initial"
-            animate="animate"
-          />
-        </motion.div>
+            className="pointer-events-none absolute inset-0 z-[8] [mask-image:radial-gradient(ellipse_70%_55%_at_50%_42%,black,transparent_72%)]"
+            aria-hidden
+          >
+            <motion.div
+              className="absolute left-1/2 top-[38%] h-[52rem] w-[52rem] max-w-[min(52rem,100vw)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(217,164,65,0.36)_0%,rgba(255,243,214,0.18)_38%,transparent_68%)] blur-3xl"
+              variants={ambientGlowPulse}
+              initial="initial"
+              animate="animate"
+            />
+          </motion.div>
+        ) : null}
 
         {/* Flowers top corners (B) — z-9 */}
         <motion.div
           className="absolute left-6 top-6 z-[9] hidden w-[min(360px,26vw)] min-w-[260px] md:block"
           initial={{ opacity: 0 }}
-          animate={{ opacity: [0.55, 0.75, 0.55], y: [0, -6, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          animate={
+            lite ? { opacity: 0.68, y: 0 } : { opacity: [0.55, 0.75, 0.55], y: [0, -6, 0] }
+          }
+          transition={
+            lite ? { duration: 0.45 } : { duration: 10, repeat: Infinity, ease: "easeInOut" }
+          }
         >
           <FlowersCornerSVG side="left" />
         </motion.div>
         <motion.div
           className="absolute right-6 top-6 z-[9] hidden w-[min(380px,28vw)] min-w-[260px] md:block"
           initial={{ opacity: 0 }}
-          animate={{ opacity: [0.55, 0.75, 0.55], y: [0, -6, 0] }}
-          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
-        >
-          <FlowersCornerSVG side="right" />
-        </motion.div>
-
-        {/* Mobile flowers (light, visible) — z-9 */}
-        <motion.div
-          className="absolute left-2 top-3 z-[9] w-[140px] opacity-[0.38] sm:hidden"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0.32, 0.42, 0.32], y: [0, -4, 0] }}
-          transition={{ duration: 9.5, repeat: Infinity, ease: "easeInOut" }}
-          aria-hidden
-        >
-          <FlowersCornerSVG side="left" />
-        </motion.div>
-        <motion.div
-          className="absolute right-2 top-3 z-[9] w-[150px] opacity-[0.38] sm:hidden"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0.32, 0.42, 0.32], y: [0, -4, 0] }}
-          transition={{ duration: 10.5, repeat: Infinity, ease: "easeInOut", delay: 0.15 }}
-          aria-hidden
+          animate={
+            lite ? { opacity: 0.68, y: 0 } : { opacity: [0.55, 0.75, 0.55], y: [0, -6, 0] }
+          }
+          transition={
+            lite
+              ? { duration: 0.45 }
+              : { duration: 11, repeat: Infinity, ease: "easeInOut", delay: 0.2 }
+          }
         >
           <FlowersCornerSVG side="right" />
         </motion.div>
@@ -815,19 +795,12 @@ export default function Hero() {
         <motion.div
           className="pointer-events-none absolute right-0 top-[30%] z-[9] hidden w-[clamp(240px,20vw,360px)] opacity-[0.78] md:block"
           initial={{ opacity: 0 }}
-          animate={{ opacity: [0.58, 0.78, 0.58], y: [0, -8, 0] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 0.35 }}
-          aria-hidden
-        >
-          <SideLeavesSVG />
-        </motion.div>
-
-        {/* Mobile leaves (soft, subtle) — z-9 */}
-        <motion.div
-          className="pointer-events-none absolute right-0 top-[34%] z-[9] w-[160px] opacity-[0.35] sm:hidden"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0.3, 0.4, 0.3], y: [0, -6, 0] }}
-          transition={{ duration: 12.5, repeat: Infinity, ease: "easeInOut", delay: 0.25 }}
+          animate={
+            lite ? { opacity: 0.72, y: 0 } : { opacity: [0.58, 0.78, 0.58], y: [0, -8, 0] }
+          }
+          transition={
+            lite ? { duration: 0.45 } : { duration: 12, repeat: Infinity, ease: "easeInOut", delay: 0.35 }
+          }
           aria-hidden
         >
           <SideLeavesSVG />
@@ -837,8 +810,12 @@ export default function Hero() {
         <motion.div
           className="pointer-events-none absolute right-4 top-[46%] z-[9] hidden w-[min(300px,22vw)] opacity-[0.55] md:block"
           initial={{ opacity: 0 }}
-          animate={{ opacity: [0.45, 0.62, 0.45], y: [0, -6, 0] }}
-          transition={{ duration: 13, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          animate={
+            lite ? { opacity: 0.52, y: 0 } : { opacity: [0.45, 0.62, 0.45], y: [0, -6, 0] }
+          }
+          transition={
+            lite ? { duration: 0.45 } : { duration: 13, repeat: Infinity, ease: "easeInOut", delay: 0.5 }
+          }
           aria-hidden
         >
           <FlowersCornerSVG side="right" />
@@ -848,29 +825,21 @@ export default function Hero() {
         <motion.div
           className="absolute bottom-8 left-8 z-[10] hidden w-[clamp(450px,38vw,540px)] md:block"
           style={{ opacity: 1, transform: "translateZ(0)" }}
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          animate={lite ? undefined : { y: [0, -10, 0] }}
+          transition={
+            lite ? undefined : { duration: 10, repeat: Infinity, ease: "easeInOut" }
+          }
         >
           <HoneyJarSceneSVG />
         </motion.div>
 
-        {/* Tablet: ~20% smaller */}
         <motion.div
           className="absolute bottom-6 left-6 z-[10] hidden w-[clamp(300px,32vw,380px)] md:hidden sm:block"
           style={{ opacity: 1 }}
-          animate={{ y: [0, -9, 0] }}
-          transition={{ duration: 10.5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <HoneyJarSceneSVG />
-        </motion.div>
-
-        {/* Mobile: simplified but still strong */}
-        <motion.div
-          className="absolute bottom-4 left-3 z-[10] w-[clamp(120px,38vw,160px)] sm:hidden"
-          style={{ opacity: 1, transform: "translateZ(0)" }}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: [0, -6, 0] }}
-          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
+          animate={lite ? undefined : { y: [0, -9, 0] }}
+          transition={
+            lite ? undefined : { duration: 10.5, repeat: Infinity, ease: "easeInOut" }
+          }
         >
           <HoneyJarSceneSVG />
         </motion.div>
@@ -889,39 +858,61 @@ export default function Hero() {
             className="relative mx-auto mb-6 flex w-full justify-center px-2 md:mb-8"
           >
             <div className="relative flex w-[clamp(5rem,22vw,6.25rem)] max-w-full shrink-0 items-center justify-center md:w-[clamp(6.875rem,12vw,9.375rem)]">
-              <motion.div
-                className="pointer-events-none absolute inset-[-55%] rounded-full bg-[radial-gradient(circle_at_50%_45%,rgba(217,164,65,0.52),rgba(255,243,214,0.28)_35%,transparent_74%)] blur-3xl"
-                animate={{ opacity: [0.55, 0.85, 0.55], scale: [1, 1.04, 1] }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                aria-hidden
-              />
-              <motion.div
-                className="relative z-[1] w-full"
-                animate={{ y: [0, -5, 0] }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <Image
-                  src="/Logo.png"
-                  alt="شعار مناحل مكيراس"
-                  width={180}
-                  height={180}
-                  priority
-                  sizes="(max-width: 767px) 96px, 140px"
-                  className="mx-auto h-auto w-full max-h-[6.25rem] max-w-[6.25rem] object-contain md:max-h-[9.375rem] md:max-w-[9.375rem] [filter:drop-shadow(0_12px_36px_rgba(217,164,65,0.42))_drop-shadow(0_3px_16px_rgba(255,243,214,0.9))]"
-                />
-              </motion.div>
+              {lite ? (
+                <>
+                  <div
+                    className="pointer-events-none absolute inset-[-40%] rounded-full bg-[radial-gradient(circle_at_50%_45%,rgba(217,164,65,0.38),rgba(255,243,214,0.2)_35%,transparent_74%)] blur-xl md:inset-[-55%] md:blur-3xl"
+                    aria-hidden
+                  />
+                  <div className="relative z-[1] w-full">
+                    <Image
+                      src="/Logo.png"
+                      alt="شعار مناحل مكيراس"
+                      width={180}
+                      height={180}
+                      priority
+                      sizes="(max-width: 767px) 88px, 140px"
+                      className="mx-auto h-auto w-full max-h-[5.5rem] max-w-[5.5rem] object-contain md:max-h-[9.375rem] md:max-w-[9.375rem] [filter:drop-shadow(0_8px_24px_rgba(217,164,65,0.35))_drop-shadow(0_2px_12px_rgba(255,243,214,0.75))] md:[filter:drop-shadow(0_12px_36px_rgba(217,164,65,0.42))_drop-shadow(0_3px_16px_rgba(255,243,214,0.9))]"
+                    />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <motion.div
+                    className="pointer-events-none absolute inset-[-55%] rounded-full bg-[radial-gradient(circle_at_50%_45%,rgba(217,164,65,0.52),rgba(255,243,214,0.28)_35%,transparent_74%)] blur-3xl max-md:blur-xl"
+                    animate={{ opacity: [0.55, 0.85, 0.55], scale: [1, 1.04, 1] }}
+                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                    aria-hidden
+                  />
+                  <motion.div
+                    className="relative z-[1] w-full"
+                    animate={{ y: [0, -5, 0] }}
+                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <Image
+                      src="/Logo.png"
+                      alt="شعار مناحل مكيراس"
+                      width={180}
+                      height={180}
+                      priority
+                      sizes="(max-width: 767px) 88px, 140px"
+                      className="mx-auto h-auto w-full max-h-[5.5rem] max-w-[5.5rem] object-contain md:max-h-[9.375rem] md:max-w-[9.375rem] [filter:drop-shadow(0_12px_36px_rgba(217,164,65,0.42))_drop-shadow(0_3px_16px_rgba(255,243,214,0.9))]"
+                    />
+                  </motion.div>
+                </>
+              )}
             </div>
           </motion.div>
 
           <motion.div
             variants={fadeInUp}
-            className="mx-auto inline-flex items-center gap-2 rounded-full border border-[rgba(217,164,65,0.28)] bg-[rgba(11,9,6,0.55)] px-4 py-2 text-sm text-[#D6C3A5] shadow-[0_18px_54px_rgba(0,0,0,0.32)] backdrop-blur-md"
+            className="mx-auto inline-flex items-center gap-2 rounded-full border border-[rgba(217,164,65,0.28)] bg-[rgba(11,9,6,0.72)] px-4 py-2 text-sm text-[#D6C3A5] shadow-[0_10px_28px_rgba(0,0,0,0.28)] backdrop-blur-sm md:bg-[rgba(11,9,6,0.55)] md:shadow-[0_18px_54px_rgba(0,0,0,0.32)] md:backdrop-blur-md"
           >
             <motion.span
               className="inline-flex text-[#D9A441]"
               variants={floatingMotion}
               initial="initial"
-              animate="animate"
+              animate={lite ? "initial" : "animate"}
             >
               <Sparkles className="size-4" aria-hidden />
             </motion.span>
@@ -930,7 +921,7 @@ export default function Hero() {
 
           <motion.div variants={fadeInUp} className="relative mt-6 sm:mt-8">
             <div
-              className="pointer-events-none absolute inset-x-0 -top-20 bottom-0 mx-auto max-w-4xl opacity-90"
+              className="pointer-events-none absolute inset-x-0 -top-20 bottom-0 mx-auto hidden max-w-4xl opacity-90 md:block"
               aria-hidden
             >
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_36%,rgba(217,164,65,0.22),rgba(255,243,214,0.35)_42%,transparent_65%)] blur-3xl" />
@@ -979,27 +970,35 @@ export default function Hero() {
           >
             <motion.div
               variants={fadeInUp}
-              whileHover={{
-                y: -4,
-                boxShadow: "0 22px 48px rgba(217,164,65,0.35)",
-                transition: { duration: 0.5, ease: luxuryEase },
-              }}
+              whileHover={
+                lite
+                  ? undefined
+                  : {
+                      y: -4,
+                      boxShadow: "0 22px 48px rgba(217,164,65,0.35)",
+                      transition: { duration: 0.5, ease: luxuryEase },
+                    }
+              }
               whileTap={{ scale: 0.98 }}
             >
               <Button
                 asChild
-                className="rounded-2xl border border-[rgba(154,100,24,0.35)] bg-linear-to-b from-[#ECC66B] to-[#D9A441] px-8 py-6 text-base font-semibold text-[#1A1208] shadow-[0_14px_36px_rgba(217,164,65,0.38)] hover:from-[#f0d080] hover:to-[#cf9a32]"
+                className="rounded-2xl border border-[rgba(154,100,24,0.35)] bg-linear-to-b from-[#ECC66B] to-[#D9A441] px-8 py-6 text-base font-semibold text-[#1A1208] shadow-[0_10px_26px_rgba(217,164,65,0.28)] hover:from-[#f0d080] hover:to-[#cf9a32] md:shadow-[0_14px_36px_rgba(217,164,65,0.38)]"
               >
                 <Link href="/products">منتجاتنا</Link>
               </Button>
             </motion.div>
             <motion.div
               variants={fadeInUp}
-              whileHover={{
-                y: -4,
-                boxShadow: "0 20px 44px rgba(26,18,8,0.22)",
-                transition: { duration: 0.5, ease: luxuryEase },
-              }}
+              whileHover={
+                lite
+                  ? undefined
+                  : {
+                      y: -4,
+                      boxShadow: "0 20px 44px rgba(26,18,8,0.22)",
+                      transition: { duration: 0.5, ease: luxuryEase },
+                    }
+              }
               whileTap={{ scale: 0.98 }}
             >
               <Button
@@ -1013,7 +1012,7 @@ export default function Hero() {
 
           <motion.div
             variants={staggerContainer}
-            className="mt-14 grid w-full max-w-3xl grid-cols-1 gap-3 sm:mx-auto sm:grid-cols-3 sm:gap-4"
+            className="mt-8 grid w-full min-w-0 max-w-[min(100%,19rem)] grid-cols-3 gap-1.5 px-0 sm:mx-auto sm:mt-14 sm:max-w-3xl sm:gap-4"
           >
             {stats.map((s) => {
               const Icon = s.Icon;
@@ -1021,17 +1020,24 @@ export default function Hero() {
                 <motion.div
                   key={s.k}
                   variants={fadeInUp}
-                  whileHover={{
-                    y: -4,
-                    boxShadow: "0 30px 110px rgba(212,166,58,0.22), 0 22px 70px rgba(0,0,0,0.28)",
-                    transition: { duration: 0.5, ease: luxuryEase },
-                  }}
-                  className="hero-glass-stat relative flex flex-col items-center gap-2 rounded-3xl px-5 py-5 text-center"
+                  whileHover={
+                    lite
+                      ? undefined
+                      : {
+                          y: -4,
+                          boxShadow:
+                            "0 30px 110px rgba(212,166,58,0.22), 0 22px 70px rgba(0,0,0,0.28)",
+                          transition: { duration: 0.5, ease: luxuryEase },
+                        }
+                  }
+                  className="hero-glass-stat relative flex h-auto min-w-0 flex-col items-center gap-1 rounded-2xl px-2 py-3 text-center sm:gap-2 sm:rounded-3xl sm:px-5 sm:py-5"
                 >
-                  <span className="grid size-10 place-items-center rounded-2xl border border-[rgba(212,166,58,0.28)] bg-[radial-gradient(circle_at_30%_20%,rgba(212,166,58,0.18),rgba(17,17,17,0.72)_55%,rgba(10,8,6,0.82)_100%)] text-[#D4A63A] shadow-[0_14px_30px_rgba(0,0,0,0.32),0_0_28px_rgba(212,166,58,0.18)]">
-                    <Icon className="size-5" strokeWidth={1.75} aria-hidden />
+                  <span className="grid size-8 shrink-0 place-items-center rounded-xl border border-[rgba(212,166,58,0.28)] bg-[radial-gradient(circle_at_30%_20%,rgba(212,166,58,0.18),rgba(17,17,17,0.72)_55%,rgba(10,8,6,0.82)_100%)] text-[#D4A63A] shadow-[0_6px_14px_rgba(0,0,0,0.22)] sm:size-10 sm:rounded-2xl sm:shadow-[0_8px_18px_rgba(0,0,0,0.26)] md:shadow-[0_14px_30px_rgba(0,0,0,0.32),0_0_28px_rgba(212,166,58,0.18)]">
+                    <Icon className="size-4 sm:size-5" strokeWidth={1.75} aria-hidden />
                   </span>
-                  <span className="text-sm font-semibold text-[#D4A63A]">{s.k}</span>
+                  <span className="max-w-[100%] text-[10px] font-semibold leading-snug text-[#D4A63A] sm:text-sm sm:leading-normal">
+                    {s.k}
+                  </span>
                 </motion.div>
               );
             })}

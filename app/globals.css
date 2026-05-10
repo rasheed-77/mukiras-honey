@@ -637,4 +637,35 @@
     position: relative;
     z-index: 20;
   }
+
+  /* موبايل: ظلال وأداء أخف — الحفاظ على الفخامة بدون blur ثقيل */
+  @media (max-width: 767px) {
+    .luxury-card,
+    .lux-card {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow:
+        0 12px 32px rgba(0, 0, 0, 0.26),
+        0 0 22px rgba(217, 164, 65, 0.05),
+        0 0 0 1px rgba(255, 243, 214, 0.06) inset;
+    }
+
+    .luxury-card:hover,
+    .lux-card:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 16px 44px rgba(0, 0, 0, 0.32),
+        0 0 34px rgba(217, 164, 65, 0.09),
+        0 0 0 1px rgba(255, 243, 214, 0.1) inset;
+    }
+
+    .hero-glass-stat {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow:
+        0 0 0 1px rgba(255, 247, 214, 0.1) inset,
+        0 10px 28px rgba(0, 0, 0, 0.22),
+        0 14px 36px rgba(212, 166, 58, 0.08);
+    }
+  }
 }
