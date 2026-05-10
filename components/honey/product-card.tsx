@@ -4,9 +4,10 @@ import { motion } from "framer-motion";
 import { Droplet, ImageOff } from "lucide-react";
 import Link from "next/link";
 
+import { ProductImageFrame } from "@/components/honey/product-image-frame";
 import { Badge } from "@/components/ui/badge";
 import { luxuryCardHover, luxuryEase, scaleIn, transitionHover } from "@/lib/motion";
-import type { HoneyProduct } from "@/lib/products";
+import { type HoneyProduct, isNaturalMixProduct, isNutProduct } from "@/lib/products";
 import { cn } from "@/lib/utils";
 
 function formatPrice(price?: number) {
@@ -26,6 +27,11 @@ export default function ProductCard({ product }: { product: HoneyProduct }) {
   const price = formatPrice(product.price);
   const available = product.availability === "available";
   const hasImage = Boolean(product.image);
+  const visualTheme = isNutProduct(product)
+    ? "nuts"
+    : isNaturalMixProduct(product)
+      ? "mixes"
+      : "honey";
 
   return (
     <Link href={`/products/${product.id}`} className="block">
@@ -49,17 +55,15 @@ export default function ProductCard({ product }: { product: HoneyProduct }) {
       </div>
 
       <div className="relative">
-        <div className="aspect-[4/3] overflow-hidden rounded-[1.5rem]">
+        <div className="h-[220px] overflow-hidden rounded-[1.5rem] sm:h-[250px] lg:h-[320px]">
           {hasImage ? (
-            <div className="relative h-full w-full">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={product.image}
-                alt={product.name}
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
-              />
-              <div className="pointer-events-none absolute inset-0 lux-media-overlay opacity-[0.55] transition-opacity duration-700 group-hover:opacity-[0.45]" />
-            </div>
+            <ProductImageFrame
+              src={product.image!}
+              alt={product.name}
+              variant="card"
+              visualTheme={visualTheme}
+              className="h-full"
+            />
           ) : (
             <div className="relative h-full w-full">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(212,166,58,0.22),transparent_60%),radial-gradient(circle_at_70%_70%,rgba(255,243,214,0.14),transparent_60%)]" />
@@ -75,7 +79,7 @@ export default function ProductCard({ product }: { product: HoneyProduct }) {
                       ease: "easeInOut",
                     }}
                   >
-                    <Droplet className="size-4 text-[#D4A63A]" />
+                    <Droplet className="size-4 text-[#D9A441]" />
                     <span className="text-sm font-medium text-[rgba(255,243,214,0.9)]">
                       عسل فاخر
                     </span>

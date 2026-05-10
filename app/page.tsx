@@ -4,10 +4,11 @@ import BlogPreview from "@/components/honey/blog-preview";
 import Contact from "@/components/honey/contact";
 import Features from "@/components/honey/features";
 import Footer from "@/components/honey/footer";
-import Gallery from "@/components/honey/gallery";
 import Hero from "@/components/honey/hero";
 import Journey from "@/components/honey/journey";
 import Navbar from "@/components/honey/navbar";
+import NaturalMixesSection from "@/components/honey/natural-mixes-section";
+import NutsSection from "@/components/honey/nuts-section";
 import ProductsSection from "@/components/honey/products-section";
 import TestimonialsSlider from "@/components/honey/testimonials-slider";
 import VisionMission from "@/components/honey/vision-mission";
@@ -22,11 +23,12 @@ export default function Home() {
         <Features />
         <About />
         <ProductsSection />
+        <NutsSection />
+        <NaturalMixesSection />
         <VisionMission />
         <Achievements />
         <Journey />
         <WhyChooseUs />
-        <Gallery />
         <TestimonialsSlider />
         <BlogPreview />
         <Contact />

@@ -61,10 +61,24 @@ export default function Footer() {
               </motion.a>
               <motion.a
                 className="block w-fit transition-colors hover:text-[#D9A441]"
-                href="#products"
+                href="/products"
                 whileHover={{ x: -3, transition: { duration: 0.35, ease: luxuryEase } }}
               >
                 منتجاتنا
+              </motion.a>
+              <motion.a
+                className="block w-fit transition-colors hover:text-[#D9A441]"
+                href="#nuts"
+                whileHover={{ x: -3, transition: { duration: 0.35, ease: luxuryEase } }}
+              >
+                المكسرات
+              </motion.a>
+              <motion.a
+                className="block w-fit transition-colors hover:text-[#D9A441]"
+                href="#natural-mixes"
+                whileHover={{ x: -3, transition: { duration: 0.35, ease: luxuryEase } }}
+              >
+                خلطات طبيعية
               </motion.a>
               <motion.a
                 className="block w-fit transition-colors hover:text-[#D9A441]"
@@ -72,13 +86,6 @@ export default function Footer() {
                 whileHover={{ x: -3, transition: { duration: 0.35, ease: luxuryEase } }}
               >
                 من نحن
-              </motion.a>
-              <motion.a
-                className="block w-fit transition-colors hover:text-[#D9A441]"
-                href="#gallery"
-                whileHover={{ x: -3, transition: { duration: 0.35, ease: luxuryEase } }}
-              >
-                المعرض
               </motion.a>
               <motion.a
                 className="block w-fit transition-colors hover:text-[#D9A441]"

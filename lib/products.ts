@@ -1,5 +1,7 @@
 export type ProductAvailability = "available" | "unavailable";
 
+export type ProductCategory = "honey" | "nuts" | "mixes";
+
 export type HoneyProduct = {
   id: string;
   name: string;
@@ -8,6 +10,8 @@ export type HoneyProduct = {
   size: string;
   price?: number;
   image?: string;
+  /** افتراضي: عسل — لتمييز المكسرات عن كروت العسل */
+  category?: ProductCategory;
   availability: ProductAvailability;
   createdAt: number;
 };
@@ -15,61 +19,179 @@ export type HoneyProduct = {
 const STORAGE_KEY = "honey.products.v1";
 const EVENT_NAME = "honey-products-changed";
 
+/** أزيل من الكتالوج — لا تُعرض حتى لو وُجدت في التخزين المحلي */
+const LEGACY_HONEY_DEMO_IDS = new Set([
+  "demo-1",
+  "demo-2",
+  "demo-3",
+  "demo-4",
+  "demo-5",
+  "demo-6",
+]);
+
 export const demoProducts: HoneyProduct[] = [
   {
-    id: "demo-1",
-    name: "عسل سدر فاخر",
-    shortDescription: "قوام غني ونكهة مميزة — نموذج عرض.",
-    type: "سدر",
-    size: "500 جم",
-    price: 0,
+    id: "samar-honey",
+    name: "عسل سمر",
+    shortDescription:
+      "عسل السمر من أنواع العسل الطبيعي المستخرج من رحيق شجر السمر، وهو عسل ذو لون داكن ونكهة قوية ومركزة. يُعرف عسل السمر بفوائده الطبيعية، ويُستخدم تقليديًا لدعم صحة المعدة والمساعدة في تهدئة الالتهابات.",
+    type: "عسل طبيعي",
+    size: "غير محدد",
+    image: "/Product%20Image/1.png",
     availability: "available",
-    createdAt: 0,
+    createdAt: 1,
   },
   {
-    id: "demo-2",
-    name: "عسل طلح",
-    shortDescription: "اختيار يمني أصيل بمذاق متوازن — نموذج عرض.",
-    type: "طلح",
-    size: "250 جم",
+    id: "alb-honey",
+    name: "عسل علب",
+    shortDescription:
+      "من أنواع العسل الذي يُنتج من أزهار شجرة السدر. عسل السدر يُعرف بأنه مضاد طبيعي قوي، وله رائحة وطعم مميزان، ويُستخدم تقليديًا لدعم الصحة والعناية بالحروق والجروح.",
+    type: "عسل سدر طبيعي",
+    size: "غير محدد",
+    image: "/Product%20Image/2.png",
     availability: "available",
-    createdAt: 0,
+    createdAt: 2,
   },
   {
-    id: "demo-3",
-    name: "عسل زهور برية",
-    shortDescription: "قوام عميق ورائحة غنية — نموذج عرض.",
-    type: "زهور",
-    size: "1 كجم",
-    availability: "unavailable",
-    createdAt: 0,
+    id: "sham-al-asal",
+    name: "شمع العسل",
+    shortDescription:
+      "صالح للأكل ويقدم العديد من الفوائد الصحية. فهو طبيعي بالكامل ويتم استخراجه مباشرة من الخلية مما يجعله ممتازًا تمامًا في الذوق والجودة.",
+    type: "شمع طبيعي",
+    size: "غير محدد",
+    image: "/Product%20Image/3.png",
+    availability: "available",
+    createdAt: 3,
   },
   {
-    id: "demo-4",
-    name: "عسل جبلي",
-    shortDescription: "نقاء ودفء بنكهة جبلية — نموذج عرض.",
-    type: "جبلي",
-    size: "500 جم",
+    id: "oudi-honey",
+    name: "عسل عودي",
+    shortDescription:
+      "من أنواع العسل الذي ينتج من أزهار شجرة الصورب المنتشرة في جبال منطقة العود في اليمن ومنها محافظتا إب والضالع.",
+    type: "عسل صورب / عودي",
+    size: "غير محدد",
+    image: "/Product%20Image/4.png",
     availability: "available",
-    createdAt: 0,
+    createdAt: 4,
   },
   {
-    id: "demo-5",
-    name: "عسل الحمضيات",
-    shortDescription: "عطر لطيف ولمسة منعشة — نموذج عرض.",
-    type: "حمضيات",
-    size: "500 جم",
+    id: "aseemi-honey",
+    name: "عسل عصيمي",
+    shortDescription:
+      "من أنواع العسل الطبيعي الذي يتم إنتاجه في منطقة العصيمات شمال اليمن، ويتميز بلونه الفاتح ونكهته الحلوة المميزة.",
+    type: "عسل طبيعي",
+    size: "غير محدد",
+    image: "/Product%20Image/5.png",
     availability: "available",
-    createdAt: 0,
+    createdAt: 5,
   },
   {
-    id: "demo-6",
-    name: "عسل صيفي",
-    shortDescription: "خيار متوازن ومناسب للهدايا — نموذج عرض.",
-    type: "موسمي",
-    size: "250 جم",
+    id: "baladi-raisins",
+    name: "زبيب بلدي",
+    shortDescription:
+      "زبيب بلدي فاخر يتميز بحلاوته الطبيعية وفوائده الغذائية الفريدة، يضيف لذة طيبة للوجبات والحلويات.",
+    type: "مكسرات ومنتجات طبيعية",
+    size: "غير محدد",
+    category: "nuts",
+    image: "/nuts%20Image/1.png",
     availability: "available",
-    createdAt: 0,
+    createdAt: 10,
+  },
+  {
+    id: "farasees",
+    name: "فراصيص",
+    shortDescription:
+      "فراصيص طازجة وغنية بالفيتامينات والمواد المضادة للأكسدة، تضفي نكهة منعشة على الوجبات والسلطات.",
+    type: "مكسرات ومنتجات طبيعية",
+    size: "غير محدد",
+    category: "nuts",
+    image: "/nuts%20Image/2.png",
+    availability: "available",
+    createdAt: 11,
+  },
+  {
+    id: "green-pumpkin-seeds",
+    name: "قرع أخضر",
+    shortDescription:
+      "بذور قرع أخضر طبيعية وغنية بالمغنيسيوم والألياف، تعزز الصحة الهضمية وتضفي مذاقًا مميزًا للوجبات.",
+    type: "بذور طبيعية",
+    size: "غير محدد",
+    category: "nuts",
+    image: "/nuts%20Image/3.png",
+    availability: "available",
+    createdAt: 12,
+  },
+  {
+    id: "local-almond",
+    name: "لوز بلدي",
+    shortDescription:
+      "لوز بلدي عالي الجودة، مكمل غذائي لذيذ يحتوي على الفيتامينات والمعادن الأساسية، يمنحك طاقة وصحة.",
+    type: "مكسرات طبيعية",
+    size: "غير محدد",
+    category: "nuts",
+    image: "/nuts%20Image/4.png",
+    availability: "available",
+    createdAt: 13,
+  },
+  {
+    id: "max-nutrition-paste",
+    name: "معجون ماكس الغذائي",
+    shortDescription:
+      "معجون بالعسل وغذاء ملكات وحبوب اللقاح، بالإضافة إلى الجنسينج والبروبلس والعديد من الأعشاب الطبيعية الأخرى.",
+    type: "خلطات طبيعية",
+    size: "غير محدد",
+    category: "mixes",
+    image: "/normal%20mixing/1.png",
+    availability: "available",
+    createdAt: 20,
+  },
+  {
+    id: "royal-paste",
+    name: "المعجون الملكي",
+    shortDescription:
+      "خلطة طبيعية مكونة من العسل والأعشاب الطبيعية، مصممة لدعم النشاط والحيوية وتحسين نمط الحياة بشكل طبيعي.",
+    type: "خلطات طبيعية",
+    size: "غير محدد",
+    category: "mixes",
+    image: "/normal%20mixing/2.png",
+    availability: "available",
+    createdAt: 21,
+  },
+  {
+    id: "mukiras-royal-mix",
+    name: "مناحل مكيراس الملكية",
+    shortDescription:
+      "خلطة ملكية مكونة من المكسرات المنوعة وأجود أنواع العسل.",
+    type: "خلطات طبيعية",
+    size: "غير محدد",
+    category: "mixes",
+    image: "/normal%20mixing/3.png",
+    availability: "available",
+    createdAt: 22,
+  },
+  {
+    id: "amal-fertility-mix",
+    name: "أمل للإنجاب",
+    shortDescription:
+      "خلطة مكونة من عسل طبيعي وأعشاب طبيعية، يتم تقديمها ضمن منتجات الخلطات الطبيعية المختارة من مناحل مكيراس.",
+    type: "خلطات طبيعية",
+    size: "غير محدد",
+    category: "mixes",
+    image: "/normal%20mixing/4.png",
+    availability: "available",
+    createdAt: 23,
+  },
+  {
+    id: "amber-weight-gain-mix",
+    name: "العنبرية العالمية للتسمين",
+    shortDescription:
+      "خلطة مكونة من عسل ومكسرات وأعشاب خاصة، مصممة لدعم الطاقة وفتح الشهية ضمن المنتجات الطبيعية المختارة.",
+    type: "خلطات طبيعية",
+    size: "غير محدد",
+    category: "mixes",
+    image: "/normal%20mixing/5.png",
+    availability: "available",
+    createdAt: 24,
   },
 ];
 
@@ -100,6 +222,8 @@ function normalizeProducts(raw: unknown): HoneyProduct[] {
         size: p.size ?? "",
         price: typeof p.price === "number" ? p.price : undefined,
         image: typeof p.image === "string" ? p.image : undefined,
+        category:
+          p.category === "nuts" ? "nuts" : p.category === "mixes" ? "mixes" : "honey",
         availability: p.availability === "unavailable" ? "unavailable" : "available",
         createdAt: typeof p.createdAt === "number" ? p.createdAt : Date.now(),
       }),
@@ -121,6 +245,37 @@ export function getAllProducts(): HoneyProduct[] {
     if (!seen.has(p.id)) merged.push(p);
   }
   return merged;
+}
+
+export function isNutProduct(p: HoneyProduct): boolean {
+  return (p.category ?? "honey") === "nuts";
+}
+
+/** تصفية قائمة عشوائية ككتالوج عسل (نفس منطق الواجهة) */
+export function filterHoneyCatalog(products: HoneyProduct[]): HoneyProduct[] {
+  return products.filter(
+    (p) =>
+      (p.category ?? "honey") === "honey" && !LEGACY_HONEY_DEMO_IDS.has(p.id),
+  );
+}
+
+/** منتجات العسل فقط — من دون مكسرات أو خلطات أو عروض تجريبية قديمة */
+export function getHoneyProducts(): HoneyProduct[] {
+  return filterHoneyCatalog(getAllProducts());
+}
+
+/** المكسرات فقط */
+export function getNutProducts(): HoneyProduct[] {
+  return getAllProducts().filter((p) => isNutProduct(p));
+}
+
+export function isNaturalMixProduct(p: HoneyProduct): boolean {
+  return (p.category ?? "honey") === "mixes";
+}
+
+/** خلطات طبيعية فقط */
+export function getNaturalMixProducts(): HoneyProduct[] {
+  return getAllProducts().filter((p) => isNaturalMixProduct(p));
 }
 
 export function getProductById(id: string): HoneyProduct | null {

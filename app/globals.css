@@ -71,8 +71,16 @@
   --animate-appear-zoom: appear-zoom 0.6s forwards ease-out;
   --animate-float: float 8s ease-in-out infinite;
   --animate-float-slow: float 12s ease-in-out infinite;
+  --animate-product-float-subtle: product-float-subtle 9s ease-in-out infinite;
   --animate-glow: glow 6s ease-in-out infinite;
   --animate-rise: rise 0.7s ease-out both;
+  --animate-theme-honey-warm-pulse: theme-honey-warm-pulse 5.5s ease-in-out infinite;
+  --animate-theme-honey-flame-sway: theme-honey-flame-sway 7s ease-in-out infinite;
+  --animate-theme-particle-twinkle: theme-particle-twinkle 4.5s ease-in-out infinite;
+  --animate-theme-earth-glow: theme-earth-glow 7s ease-in-out infinite;
+  --animate-theme-dust-drift: theme-dust-drift 5s ease-in-out infinite;
+  --animate-theme-mixes-glow: theme-mixes-glow 8s ease-in-out infinite;
+  --animate-theme-mixes-drift: theme-mixes-drift 12s ease-in-out infinite;
 
   /* Breakpoints */
   --breakpoint-xs: 30rem;
@@ -129,6 +137,17 @@
     }
   }
 
+  /* عبوة منتج: طفو دائم خفيف جدًا — يُوقف تلقائيًا مع prefers-reduced-motion عبر motion-safe في المكوّن */
+  @keyframes product-float-subtle {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(0, -4px, 0);
+    }
+  }
+
   @keyframes glow {
     0%,
     100% {
@@ -151,6 +170,91 @@
       opacity: 1;
       transform: translateY(0);
       filter: blur(0);
+    }
+  }
+
+  /* خلفيات مسرح صورة المنتج — عسل / مكسرات / خلطات */
+  @keyframes theme-honey-warm-pulse {
+    0%,
+    100% {
+      opacity: 0.42;
+      transform: scale(1) translateZ(0);
+    }
+    50% {
+      opacity: 0.68;
+      transform: scale(1.035) translateZ(0);
+    }
+  }
+
+  @keyframes theme-honey-flame-sway {
+    0%,
+    100% {
+      transform: translateX(0) scaleY(1);
+      opacity: 1;
+    }
+    50% {
+      transform: translateX(1.5px) scaleY(1.02);
+      opacity: 0.92;
+    }
+  }
+
+  @keyframes theme-particle-twinkle {
+    0%,
+    100% {
+      opacity: 0.28;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+      opacity: 0.62;
+      transform: translate3d(0, -2px, 0) scale(1.15);
+    }
+  }
+
+  @keyframes theme-earth-glow {
+    0%,
+    100% {
+      opacity: 0.45;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.62;
+      transform: scale(1.03);
+    }
+  }
+
+  @keyframes theme-dust-drift {
+    0%,
+    100% {
+      opacity: 0.22;
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      opacity: 0.48;
+      transform: translate3d(3px, -4px, 0);
+    }
+  }
+
+  @keyframes theme-mixes-glow {
+    0%,
+    100% {
+      opacity: 0.48;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.72;
+      transform: scale(1.04);
+    }
+  }
+
+  @keyframes theme-mixes-drift {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+      opacity: 0.12;
+    }
+    50% {
+      transform: translate3d(2px, -3px, 0);
+      opacity: 0.2;
     }
   }
 }
@@ -462,13 +566,11 @@
 
   /* Luxury Honey Cinematic Hero — layered atmosphere */
   .hero-cinematic-base {
-    background-color: #f6e7c8;
-    background-image:
-      radial-gradient(ellipse 120% 90% at 50% -5%, rgba(255, 243, 214, 0.92) 0%, transparent 50%),
-      radial-gradient(ellipse 85% 65% at 50% 110%, rgba(154, 100, 24, 0.08) 0%, transparent 48%),
-      radial-gradient(circle at 12% 88%, rgba(217, 164, 65, 0.28) 0%, transparent 42%),
-      radial-gradient(circle at 92% 22%, rgba(255, 243, 214, 0.55) 0%, transparent 38%),
-      linear-gradient(168deg, #fff3d6 0%, #f6e7c8 42%, #edd9a8 88%, #e8d19a 100%);
+    background:
+      radial-gradient(circle at 45% 18%, rgba(217, 164, 65, 0.16) 0%, transparent 42%),
+      radial-gradient(circle at 14% 82%, rgba(217, 164, 65, 0.14) 0%, transparent 44%),
+      radial-gradient(circle at 86% 22%, rgba(255, 244, 214, 0.08) 0%, transparent 38%),
+      linear-gradient(180deg, #0b0906 0%, #120d07 35%, #1a1208 100%);
   }
 
   .hero-honeycomb-layer {
@@ -491,7 +593,7 @@
       ellipse 75% 70% at 50% 45%,
       transparent 0%,
       transparent 55%,
-      rgba(154, 100, 24, 0.06) 100%
+      rgba(0, 0, 0, 0.38) 100%
     );
   }
 

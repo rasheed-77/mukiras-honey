@@ -5,11 +5,19 @@ import { ImageOff, MessageCircle, Tag } from "lucide-react";
 import Link from "next/link";
 import { useMemo } from "react";
 
-import ProductCard from "@/components/honey/product-card";
+import HoneyCard from "@/components/honey/honey-card";
+import NaturalMixCard from "@/components/honey/natural-mix-card";
+import NutCard from "@/components/honey/nut-card";
+import { ProductImageFrame } from "@/components/honey/product-image-frame";
 import { Button } from "@/components/ui/button";
 import { fadeInUp, luxuryEase, scaleIn, staggerContainer } from "@/lib/motion";
 import type { HoneyProduct } from "@/lib/products";
-import { getAllProducts, getProductById } from "@/lib/products";
+import {
+  getAllProducts,
+  getProductById,
+  isNaturalMixProduct,
+  isNutProduct,
+} from "@/lib/products";
 
 function formatPrice(price?: number) {
   if (typeof price !== "number") return null;
@@ -36,10 +44,9 @@ export function ProductDetailsClient({ id }: { id: string }) {
   const all = useMemo(() => getAllProducts(), []);
   const similar = useMemo(() => {
     if (!product) return [];
-    return all
-      .filter((p) => p.id !== product.id)
-      .filter((p) => (product.type ? p.type === product.type : true))
-      .slice(0, 3);
+    const sameCategory = (p: (typeof all)[number]) =>
+      (p.category ?? "honey") === (product.category ?? "honey");
+    return all.filter((p) => p.id !== product.id).filter(sameCategory).slice(0, 3);
   }, [all, product]);
 
   if (!product) {
@@ -51,7 +58,7 @@ export function ProductDetailsClient({ id }: { id: string }) {
         </div>
         <div className="mt-6">
           <Button asChild className="rounded-2xl">
-            <Link href="/#products">رجوع للمنتجات</Link>
+            <Link href="/products">رجوع للمنتجات</Link>
           </Button>
         </div>
       </div>
@@ -70,10 +77,17 @@ export function ProductDetailsClient({ id }: { id: string }) {
     >
       <motion.section variants={scaleIn} className="lux-card relative rounded-[2rem] p-6 sm:p-8">
         <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <div className="relative overflow-hidden rounded-[1.5rem] border border-[rgba(217,164,65,0.25)]">
+          <div className="group relative overflow-hidden rounded-[1.5rem] border border-[rgba(217,164,65,0.25)]">
             {product.image ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={product.image} alt={product.name} className="h-full w-full object-cover" />
+              <ProductImageFrame
+                src={product.image}
+                alt={product.name}
+                variant="detail"
+                visualTheme={
+                  isNutProduct(product) ? "nuts" : isNaturalMixProduct(product) ? "mixes" : "honey"
+                }
+                className="min-h-[280px] w-full lg:min-h-[380px]"
+              />
             ) : (
               <div className="relative aspect-[4/3]">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(217,164,65,0.22),transparent_60%),radial-gradient(circle_at_70%_70%,rgba(255,243,214,0.12),transparent_60%),linear-gradient(135deg,rgba(17,17,17,0.86),rgba(11,9,6,0.78),rgba(22,17,11,0.72))]" />
@@ -82,11 +96,10 @@ export function ProductDetailsClient({ id }: { id: string }) {
                   <div className="lux-icon-badge grid size-12 place-items-center rounded-2xl">
                     <ImageOff className="size-5 text-[#D9A441]" aria-hidden />
                   </div>
-                  <div className="lux-card-subtle mt-3 text-xs">صورة Placeholder فاخرة</div>
+                  <div className="lux-card-subtle mt-3 text-xs">صورة المنتج ستُضاف لاحقًا</div>
                 </div>
               </div>
             )}
-            <div className="pointer-events-none absolute inset-0 lux-media-overlay opacity-[0.45]" />
           </div>
 
           <div>
@@ -132,7 +145,7 @@ export function ProductDetailsClient({ id }: { id: string }) {
               </motion.div>
               <motion.div whileHover={{ y: -3 }} transition={{ duration: 0.45, ease: luxuryEase }}>
                 <Button asChild variant="outline" className="rounded-2xl">
-                  <Link href="/#products">رجوع للمنتجات</Link>
+                  <Link href="/products">رجوع للمنتجات</Link>
                 </Button>
               </motion.div>
             </motion.div>
@@ -153,9 +166,15 @@ export function ProductDetailsClient({ id }: { id: string }) {
             animate="visible"
             className="mt-6 grid gap-4"
           >
-            {similar.map((p) => (
-              <ProductCard key={p.id} product={p} />
-            ))}
+            {similar.map((p) =>
+              isNutProduct(p) ? (
+                <NutCard key={p.id} product={p} />
+              ) : isNaturalMixProduct(p) ? (
+                <NaturalMixCard key={p.id} product={p} />
+              ) : (
+                <HoneyCard key={p.id} product={p} />
+              ),
+            )}
           </motion.div>
         )}
       </motion.aside>

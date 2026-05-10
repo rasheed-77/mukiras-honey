@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 import { Section } from "@/components/ui/section";
 import { fadeInUp, luxuryEase, scaleIn, staggerContainer } from "@/lib/motion";
@@ -11,12 +12,62 @@ export default function About() {
   return (
     <Section id="about">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <motion.div
             variants={fadeInUp}
             initial="hidden"
             whileInView="visible"
             viewport={viewport}
+            className="order-1 lg:order-1"
+          >
+            <motion.div
+              whileHover={{ scale: 1.015 }}
+              transition={{ duration: 0.75, ease: luxuryEase }}
+              className="luxury-card group relative overflow-hidden rounded-3xl"
+            >
+              <motion.div
+                className="pointer-events-none absolute -inset-8 opacity-70 blur-3xl"
+                animate={{ opacity: [0.55, 0.8, 0.55], scale: [1, 1.03, 1] }}
+                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                aria-hidden
+              >
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_35%_20%,rgba(217,164,65,0.22),transparent_58%)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_75%,rgba(217,164,65,0.12),transparent_62%)]" />
+              </motion.div>
+
+              <div className="relative aspect-[4/5] w-full sm:aspect-[16/10] lg:aspect-[4/5]">
+                <Image
+                  src="/who are we/who are we.jpg"
+                  alt="مناحل مكيراس"
+                  fill
+                  priority={false}
+                  sizes="(max-width: 1023px) 100vw, 45vw"
+                  className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.06]"
+                />
+                {/* cinematic overlays */}
+                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.18),rgba(0,0,0,0.38)_55%,rgba(0,0,0,0.58))]" />
+                <div className="pointer-events-none absolute inset-0 opacity-[0.85] [background:radial-gradient(circle_at_35%_18%,rgba(217,164,65,0.22),transparent_58%),radial-gradient(circle_at_78%_78%,rgba(255,243,214,0.08),transparent_62%)]" />
+                <div className="pointer-events-none absolute inset-0 opacity-[0.22] [background:linear-gradient(135deg,rgba(255,255,255,0.10),transparent_42%)]" />
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="mt-4 text-sm text-[#CBB89A]"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={viewport}
+              transition={{ duration: 0.6, ease: luxuryEase }}
+            >
+              لقطة حقيقية — يتم تحديث مكتبة الصور لاحقًا حسب المنتجات والتغليف.
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewport}
+            className="order-2 lg:order-2"
           >
             <div className="text-primary text-sm font-semibold tracking-wide">
               نبذة عن مناحل مكيراس
@@ -59,48 +110,6 @@ export default function About() {
                 </motion.div>
               ))}
             </motion.div>
-          </motion.div>
-
-          <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewport}
-            className="lux-card relative overflow-hidden rounded-[2rem] p-6 sm:p-8"
-          >
-            <div className="pointer-events-none absolute inset-0 opacity-40 blur-3xl">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_10%,rgba(217,164,65,0.15),transparent_58%)]" />
-            </div>
-            <div className="relative">
-              <h3 className="lux-card-title text-xl font-semibold">مختاراتنا</h3>
-              <p className="lux-card-subtle mt-2 text-sm leading-relaxed">
-                نعرض الأنواع الأساسية بشكل مختصر وواضح بصريًا.
-              </p>
-
-              <div className="mt-6 grid gap-4">
-                <div className="lux-card relative rounded-3xl p-5">
-                  <div className="lux-card-title text-sm font-semibold">
-                    أنواع العسل اليمني المختارة
-                  </div>
-                  <ul className="lux-card-text mt-3 grid gap-2 text-sm">
-                    <li>العسل السدر الحضرمي</li>
-                    <li>العسل الشبواني</li>
-                    <li>العسل العودي</li>
-                  </ul>
-                </div>
-
-                <div className="lux-card relative rounded-3xl p-5">
-                  <div className="lux-card-title text-sm font-semibold">
-                    منتجات طبيعية إضافية
-                  </div>
-                  <ul className="lux-card-text mt-3 grid gap-2 text-sm">
-                    <li>المكسرات الطبيعية</li>
-                    <li>الزيوت</li>
-                    <li>الأعشاب المختارة</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
           </motion.div>
         </div>
       </div>

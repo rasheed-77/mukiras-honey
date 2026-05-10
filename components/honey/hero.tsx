@@ -619,22 +619,22 @@ export default function Hero() {
       {/* Background (z-0) */}
       <div className="pointer-events-none absolute inset-0 z-0 hero-cinematic-base" />
       <div className="pointer-events-none absolute inset-0 z-0 hero-vignette-soft" />
-      {/* Warm cream overlay + gold cinematic lighting (keeps text readable) */}
+      {/* Dark luxury honey overlay + cinematic lighting */}
       <div
-        className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(180deg,rgba(255,243,214,0.82),rgba(246,231,200,0.68),rgba(240,222,184,0.8))]"
+        className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(180deg,rgba(11,9,6,0.0),rgba(11,9,6,0.25)_40%,rgba(0,0,0,0.55)_100%)]"
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute inset-0 z-0 [background:radial-gradient(ellipse_at_50%_38%,rgba(217,164,65,0.42),rgba(255,243,214,0.18)_38%,transparent_68%)]"
+        className="pointer-events-none absolute inset-0 z-0 [background:radial-gradient(ellipse_at_50%_36%,rgba(217,164,65,0.22),rgba(255,244,214,0.08)_38%,transparent_70%)]"
         aria-hidden
       />
       {/* Cinematic light rays like reference */}
       <div
-        className="pointer-events-none absolute inset-0 z-0 opacity-[0.55] [background:conic-gradient(from_220deg_at_42%_6%,rgba(255,247,214,0.0)_0deg,rgba(255,247,214,0.18)_26deg,rgba(217,164,65,0.10)_62deg,rgba(255,247,214,0.0)_120deg,rgba(255,247,214,0.14)_170deg,rgba(255,247,214,0.0)_360deg)] blur-[1px]"
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.42] [background:conic-gradient(from_220deg_at_42%_6%,rgba(255,244,214,0.0)_0deg,rgba(255,244,214,0.16)_26deg,rgba(217,164,65,0.12)_62deg,rgba(255,244,214,0.0)_120deg,rgba(255,244,214,0.12)_170deg,rgba(255,244,214,0.0)_360deg)] blur-[1px]"
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute inset-0 z-0 opacity-[0.35] [background:radial-gradient(circle_at_18%_18%,rgba(255,247,214,0.38),transparent_46%),radial-gradient(circle_at_86%_14%,rgba(255,247,214,0.26),transparent_52%)]"
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.28] [background:radial-gradient(circle_at_18%_18%,rgba(255,244,214,0.18),transparent_46%),radial-gradient(circle_at_86%_14%,rgba(255,244,214,0.12),transparent_52%)]"
         aria-hidden
       />
 
@@ -642,7 +642,7 @@ export default function Hero() {
       <div
         className="pointer-events-none absolute inset-y-0 left-0 z-[1] w-[32%] hero-honeycomb-layer"
         style={{
-          opacity: 0.08,
+          opacity: 0.06,
           maskImage: "linear-gradient(to right, black 0%, black 65%, transparent 100%)",
         }}
         aria-hidden
@@ -650,7 +650,7 @@ export default function Hero() {
       <div
         className="pointer-events-none absolute inset-y-0 right-0 z-[1] w-[32%] hero-honeycomb-layer"
         style={{
-          opacity: 0.08,
+          opacity: 0.06,
           maskImage: "linear-gradient(to left, black 0%, black 65%, transparent 100%)",
         }}
         aria-hidden
@@ -915,7 +915,7 @@ export default function Hero() {
 
           <motion.div
             variants={fadeInUp}
-            className="mx-auto inline-flex items-center gap-2 rounded-full border border-[rgba(217,164,65,0.32)] bg-[rgba(255,243,214,0.55)] px-4 py-2 text-sm text-[#5c4a32] shadow-[0_8px_28px_rgba(26,18,8,0.06)] backdrop-blur-md"
+            className="mx-auto inline-flex items-center gap-2 rounded-full border border-[rgba(217,164,65,0.28)] bg-[rgba(11,9,6,0.55)] px-4 py-2 text-sm text-[#D6C3A5] shadow-[0_18px_54px_rgba(0,0,0,0.32)] backdrop-blur-md"
           >
             <motion.span
               className="inline-flex text-[#D9A441]"
@@ -938,11 +938,12 @@ export default function Hero() {
             <h1
               className="relative text-balance text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl lg:text-[3.55rem] lg:leading-[1.08]"
               style={{
-                color: "#1A1208",
-                textShadow: "0 2px 24px rgba(255,243,214,0.55), 0 1px 2px rgba(26,18,8,0.06)",
+                color: "#FFF4D6",
+                textShadow:
+                  "0 22px 80px rgba(217,164,65,0.22), 0 2px 14px rgba(0,0,0,0.55)",
               }}
             >
-              <span className="text-[#2c2214]">
+              <span className="text-[#FFF4D6]">
                 نقدم لكم عالمًا من النكهات الطبيعية
               </span>
               <br />
@@ -966,7 +967,7 @@ export default function Hero() {
 
           <motion.p
             variants={fadeInUp}
-            className="mx-auto mt-6 max-w-3xl text-pretty text-lg leading-relaxed text-[#4a3d2e] sm:text-xl"
+            className="mx-auto mt-6 max-w-3xl text-pretty text-lg leading-relaxed text-[#D6C3A5] sm:text-xl"
           >
             تتضمن منتجاتنا مجموعة متنوعة من العسل، بالإضافة إلى المكسرات الطازجة
             والزيوت والأعشاب. نسعى دائمًا لتقديم تجربة لا تُنسى للمذاق والجودة.
@@ -989,7 +990,7 @@ export default function Hero() {
                 asChild
                 className="rounded-2xl border border-[rgba(154,100,24,0.35)] bg-linear-to-b from-[#ECC66B] to-[#D9A441] px-8 py-6 text-base font-semibold text-[#1A1208] shadow-[0_14px_36px_rgba(217,164,65,0.38)] hover:from-[#f0d080] hover:to-[#cf9a32]"
               >
-                <Link href="#products">منتجاتنا</Link>
+                <Link href="/products">منتجاتنا</Link>
               </Button>
             </motion.div>
             <motion.div

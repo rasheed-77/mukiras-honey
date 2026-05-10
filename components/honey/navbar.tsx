@@ -13,9 +13,10 @@ import { cn } from "@/lib/utils";
 
 const links: { href: string; label: string }[] = [
   { href: "#home", label: "الرئيسية" },
-  { href: "#products", label: "منتجاتنا" },
+  { href: "/products", label: "منتجاتنا" },
+  { href: "#nuts", label: "المكسرات" },
+  { href: "#natural-mixes", label: "خلطات طبيعية" },
   { href: "#about", label: "من نحن" },
-  { href: "#gallery", label: "المعرض" },
   { href: "#contact", label: "تواصل معنا" },
 ];
 
