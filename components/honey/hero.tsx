@@ -734,11 +734,13 @@ export default function Hero() {
 
       {/* Flowers/Waves + Jar Scene (B/D/A) */}
       <div className="hero-decorations">
-        {/* Golden waves — مخفي على الموبايل */}
+        {/* Golden waves */}
         <motion.div
-          className="absolute bottom-0 left-0 z-[8] hidden h-72 w-full opacity-[0.72] md:block"
+          className="absolute bottom-0 left-0 z-10 block h-40 w-full max-w-full md:h-72"
           initial={{ opacity: 0 }}
-          animate={lite ? { opacity: 0.62 } : { opacity: [0.55, 0.65, 0.55] }}
+          animate={
+            lite ? { opacity: 0.38 } : { opacity: [0.55, 0.65, 0.55] }
+          }
           transition={
             lite ? { duration: 0.5 } : { duration: 12, repeat: Infinity, ease: "easeInOut" }
           }
@@ -746,12 +748,12 @@ export default function Hero() {
           <GoldenWavesSVG />
         </motion.div>
 
-        <HeroCurvesSVG className="absolute inset-0 z-[8] hidden h-full w-full min-h-[60vh] opacity-[0.55] md:block" />
+        <HeroCurvesSVG className="absolute inset-0 z-10 block h-full w-full min-h-[42vh] max-w-full opacity-[0.22] md:min-h-[60vh] md:opacity-[0.55]" />
 
         {/* وهج ذهبي نابض — معطّل على الموبايل / تقليل الحركة */}
         {!lite ? (
           <motion.div
-            className="pointer-events-none absolute inset-0 z-[8] [mask-image:radial-gradient(ellipse_70%_55%_at_50%_42%,black,transparent_72%)]"
+            className="pointer-events-none absolute inset-0 z-10 [mask-image:radial-gradient(ellipse_70%_55%_at_50%_42%,black,transparent_72%)]"
             aria-hidden
           >
             <motion.div
@@ -763,12 +765,12 @@ export default function Hero() {
           </motion.div>
         ) : null}
 
-        {/* Flowers top corners (B) — z-9 */}
+        {/* Flowers top corners */}
         <motion.div
-          className="absolute left-6 top-6 z-[9] hidden w-[min(360px,26vw)] min-w-[260px] md:block"
+          className="absolute left-3 top-3 z-10 w-[min(8.125rem,max(5.625rem,24vw))] max-w-[130px] md:left-6 md:top-6 md:max-w-none md:w-[min(360px,26vw)] md:min-w-[260px]"
           initial={{ opacity: 0 }}
           animate={
-            lite ? { opacity: 0.68, y: 0 } : { opacity: [0.55, 0.75, 0.55], y: [0, -6, 0] }
+            lite ? { opacity: 0.45, y: 0 } : { opacity: [0.55, 0.75, 0.55], y: [0, -6, 0] }
           }
           transition={
             lite ? { duration: 0.45 } : { duration: 10, repeat: Infinity, ease: "easeInOut" }
@@ -777,10 +779,10 @@ export default function Hero() {
           <FlowersCornerSVG side="left" />
         </motion.div>
         <motion.div
-          className="absolute right-6 top-6 z-[9] hidden w-[min(380px,28vw)] min-w-[260px] md:block"
+          className="absolute right-3 top-3 z-10 w-[min(8.125rem,max(5.625rem,24vw))] max-w-[130px] md:right-6 md:top-6 md:max-w-none md:w-[min(380px,28vw)] md:min-w-[260px]"
           initial={{ opacity: 0 }}
           animate={
-            lite ? { opacity: 0.68, y: 0 } : { opacity: [0.55, 0.75, 0.55], y: [0, -6, 0] }
+            lite ? { opacity: 0.45, y: 0 } : { opacity: [0.55, 0.75, 0.55], y: [0, -6, 0] }
           }
           transition={
             lite
@@ -791,12 +793,12 @@ export default function Hero() {
           <FlowersCornerSVG side="right" />
         </motion.div>
 
-        {/* Right-side leaves for richer edge (E) — z-9 */}
+        {/* Right-side leaves */}
         <motion.div
-          className="pointer-events-none absolute right-0 top-[30%] z-[9] hidden w-[clamp(240px,20vw,360px)] opacity-[0.78] md:block"
+          className="pointer-events-none absolute right-0 top-[28%] z-10 w-[min(8.125rem,max(5.625rem,22vw))] max-w-[130px] opacity-[0.42] md:top-[30%] md:max-w-none md:w-[clamp(240px,20vw,360px)] md:opacity-[0.78]"
           initial={{ opacity: 0 }}
           animate={
-            lite ? { opacity: 0.72, y: 0 } : { opacity: [0.58, 0.78, 0.58], y: [0, -8, 0] }
+            lite ? { opacity: 0.42, y: 0 } : { opacity: [0.58, 0.78, 0.58], y: [0, -8, 0] }
           }
           transition={
             lite ? { duration: 0.45 } : { duration: 12, repeat: Infinity, ease: "easeInOut", delay: 0.35 }
@@ -806,12 +808,12 @@ export default function Hero() {
           <SideLeavesSVG />
         </motion.div>
 
-        {/* Extra soft flowers on right side (adds richness, stays subtle) */}
+        {/* Extra soft flowers on right side */}
         <motion.div
-          className="pointer-events-none absolute right-4 top-[46%] z-[9] hidden w-[min(300px,22vw)] opacity-[0.55] md:block"
+          className="pointer-events-none absolute right-2 top-[44%] z-10 w-[min(8.125rem,max(5.625rem,20vw))] max-w-[130px] opacity-[0.4] md:right-4 md:top-[46%] md:max-w-none md:w-[min(300px,22vw)] md:opacity-[0.55]"
           initial={{ opacity: 0 }}
           animate={
-            lite ? { opacity: 0.52, y: 0 } : { opacity: [0.45, 0.62, 0.45], y: [0, -6, 0] }
+            lite ? { opacity: 0.4, y: 0 } : { opacity: [0.45, 0.62, 0.45], y: [0, -6, 0] }
           }
           transition={
             lite ? { duration: 0.45 } : { duration: 13, repeat: Infinity, ease: "easeInOut", delay: 0.5 }
@@ -821,9 +823,9 @@ export default function Hero() {
           <FlowersCornerSVG side="right" />
         </motion.div>
 
-        {/* Honey Jar Scene (A) — z-10 */}
+        {/* Honey Jar Scene */}
         <motion.div
-          className="absolute bottom-8 left-8 z-[10] hidden w-[clamp(450px,38vw,540px)] md:block"
+          className="absolute bottom-4 left-3 z-10 w-[min(8.125rem,max(5.625rem,26vw))] max-w-[130px] md:bottom-8 md:left-8 md:max-w-none md:w-[clamp(450px,38vw,540px)]"
           style={{ opacity: 1, transform: "translateZ(0)" }}
           animate={lite ? undefined : { y: [0, -10, 0] }}
           transition={
@@ -832,21 +834,10 @@ export default function Hero() {
         >
           <HoneyJarSceneSVG />
         </motion.div>
-
-        <motion.div
-          className="absolute bottom-6 left-6 z-[10] hidden w-[clamp(300px,32vw,380px)] md:hidden sm:block"
-          style={{ opacity: 1 }}
-          animate={lite ? undefined : { y: [0, -9, 0] }}
-          transition={
-            lite ? undefined : { duration: 10.5, repeat: Infinity, ease: "easeInOut" }
-          }
-        >
-          <HoneyJarSceneSVG />
-        </motion.div>
       </div>
 
       {/* Content */}
-      <div className="hero-content mx-auto flex min-h-[calc(100svh-82px)] w-full max-w-[100vw] flex-col items-center justify-center px-4 pb-12 pt-20 sm:px-6 sm:pb-16 sm:pt-16 lg:px-10 lg:pb-20 lg:pt-20">
+      <div className="hero-content mx-auto flex min-h-[calc(100svh-82px)] w-full max-w-[100vw] flex-col items-center justify-center px-4 pb-12 pt-20 max-[767px]:pb-28 sm:px-6 sm:pt-16 md:pb-16 lg:px-10 lg:pb-20 lg:pt-20">
         <motion.div
           className="w-full max-w-5xl text-center"
           variants={staggerContainer}
