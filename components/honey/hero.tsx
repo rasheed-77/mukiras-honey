@@ -1012,7 +1012,7 @@ export default function Hero() {
 
           <motion.div
             variants={staggerContainer}
-            className="mt-8 grid w-full min-w-0 max-w-[min(100%,19rem)] grid-cols-3 gap-1.5 px-0 sm:mx-auto sm:mt-14 sm:max-w-3xl sm:gap-4"
+            className="mt-14 grid w-full max-w-3xl grid-cols-1 gap-3 sm:mx-auto sm:grid-cols-3 sm:gap-4"
           >
             {stats.map((s) => {
               const Icon = s.Icon;
@@ -1030,14 +1030,12 @@ export default function Hero() {
                           transition: { duration: 0.5, ease: luxuryEase },
                         }
                   }
-                  className="hero-glass-stat relative flex h-auto min-w-0 flex-col items-center gap-1 rounded-2xl px-2 py-3 text-center sm:gap-2 sm:rounded-3xl sm:px-5 sm:py-5"
+                  className="hero-glass-stat relative flex flex-col items-center gap-2 rounded-3xl px-5 py-5 text-center"
                 >
-                  <span className="grid size-8 shrink-0 place-items-center rounded-xl border border-[rgba(212,166,58,0.28)] bg-[radial-gradient(circle_at_30%_20%,rgba(212,166,58,0.18),rgba(17,17,17,0.72)_55%,rgba(10,8,6,0.82)_100%)] text-[#D4A63A] shadow-[0_6px_14px_rgba(0,0,0,0.22)] sm:size-10 sm:rounded-2xl sm:shadow-[0_8px_18px_rgba(0,0,0,0.26)] md:shadow-[0_14px_30px_rgba(0,0,0,0.32),0_0_28px_rgba(212,166,58,0.18)]">
-                    <Icon className="size-4 sm:size-5" strokeWidth={1.75} aria-hidden />
+                  <span className="grid size-10 place-items-center rounded-2xl border border-[rgba(212,166,58,0.28)] bg-[radial-gradient(circle_at_30%_20%,rgba(212,166,58,0.18),rgba(17,17,17,0.72)_55%,rgba(10,8,6,0.82)_100%)] text-[#D4A63A] shadow-[0_8px_18px_rgba(0,0,0,0.26)] md:shadow-[0_14px_30px_rgba(0,0,0,0.32),0_0_28px_rgba(212,166,58,0.18)]">
+                    <Icon className="size-5" strokeWidth={1.75} aria-hidden />
                   </span>
-                  <span className="max-w-[100%] text-[10px] font-semibold leading-snug text-[#D4A63A] sm:text-sm sm:leading-normal">
-                    {s.k}
-                  </span>
+                  <span className="text-sm font-semibold text-[#D4A63A]">{s.k}</span>
                 </motion.div>
               );
             })}
